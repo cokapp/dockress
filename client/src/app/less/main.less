@@ -1,0 +1,36 @@
+@color-bg-main:		 		#EEEEEE;
+@color-bg-light:		 	#F8FAFD;
+
+body{
+	background: @color-bg-main;
+}
+
+.container{
+	padding: 20px;
+	padding-top: @app-header-height + 20px;
+}
+
+
+
+//工具类
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+    /*IE/7/6*/
+}
+
+
+/**
+ * 以下用于styles任务中进行注入
+ */
+// injector
+// endinjector
