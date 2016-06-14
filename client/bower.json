@@ -1,0 +1,35 @@
+{
+  "name": "dockress",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular-cookies": "~1.4.2",
+    "angular-touch": "~1.4.2",
+    "jquery": "~2.1.4",
+    "angular-resource": "~1.4.2",
+    "angular-ui-router": "~0.2.15",
+    "angular-toastr": "~1.5.0",
+    "moment": "~2.10.6",
+    "angular": "~1.4.2",
+    "angular-translate-loader-static-files": "^2.11.0",
+    "angular-translate": "^2.11.0"
+  },
+  "devDependencies": {},
+  "resolutions": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.2"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "semantic": {
+      "main": [
+        "dist/semantic.css",
+        "dist/semantic.js"
+      ]
+    }
+  }
+}
