@@ -14,18 +14,25 @@
             </div>
         </div>
         <div class="eight wide column">
-            <div class="ram">
+            <div class="ram clearfix">
                 <div class="left">
                 </div>
                 <div class="right">
+                    <div class="title">内存使用率</div>
+                    <div class="value">{{info.MemTotal}}</div>
+                    <div class="ui tiny progress">
+                        <div class="bar"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="ui grid containers">
-        <div class="eight wide column">
-        </div>
-        <div class="eight wide column">
+        <div class="four wide column" ng-repeat="container in containers | orderBy:'Created'">
+            <div class="container">
+                <h1>{{container.Names[0]}}</h1>
+                <p>{{container.Status}}</p>
+            </div>
         </div>
     </div>
 </div>
