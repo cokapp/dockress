@@ -7,7 +7,7 @@
         var svr = {};
 
         svr.info = function(cb) {
-            var url = 'http://ub.home:2375/info';
+            var url = 'http://ub.home:2376/info';
             var p = $http({
                 method: 'GET',
                 url: url
@@ -18,7 +18,7 @@
         };
 
         svr.containers = function(cb) {
-            var url = 'http://ub.home:2375/containers/json';
+            var url = 'http://ub.home:2376/containers/json';
             var p = $http({
                 method: 'GET',
                 url: url
