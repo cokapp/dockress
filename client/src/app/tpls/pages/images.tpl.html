@@ -1,6 +1,38 @@
-<div class="container pages">
-
-images
-
-
+<div class="container text pages images">
+    <div class="toolbar">
+        <button class="ui labeled icon primary button">
+            <i class="refresh icon"></i> {{'images.refresh'|translate}}
+        </button>
+        <button class="ui labeled icon primary button">
+            <i class="cloud download icon"></i> {{'images.pull'|translate}}
+        </button>
+    </div>
+    <table class="ui large table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>创建时间</th>
+                <th>占用空间</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="image in images | orderBy:'Created'">
+                <td>
+                    {{image.Id | limitTo : 12}}
+                </td>
+                <td>
+                    <div class="ui label">
+                        {{image.RepoTags[0]}}
+                    </div>
+                </td>
+                <td>
+                    {{image.Created * 1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}
+                </td>
+                <td>
+                    <span>{{image.VirtualSize | FileSize}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

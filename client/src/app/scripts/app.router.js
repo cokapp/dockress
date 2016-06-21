@@ -20,10 +20,20 @@
                     templateUrl: 'app/tpls/pages/images.tpl.html',
                     controller: 'imagesCtrl'
                 })
+                .state('registrys', {
+                    url: '/registrys',
+                    templateUrl: 'app/tpls/pages/registrys.tpl.html',
+                    controller: 'registrysCtrl'
+                })
                 .state('nodes', {
                     url: '/nodes',
                     templateUrl: 'app/tpls/pages/nodes.tpl.html',
                     controller: 'nodesCtrl'
+                })
+                .state('container', {
+                    url: '/container/{id}',
+                    templateUrl: 'app/tpls/pages/container.tpl.html',
+                    controller: 'containerCtrl'
                 });
 
             $urlRouterProvider.otherwise('/');
