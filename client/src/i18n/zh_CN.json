@@ -1,6 +1,21 @@
 {
-    "overview": "概览",
-    "containers": "容器",
-    "images": "映像",
-    "nodes": "节点"
+    "header": {
+        "overview": "概览",
+        "containers": "容器",
+        "images": "映像",
+        "registrys": "仓库",
+        "nodes": "节点"
+    },
+    "containers": {
+        "detail": "明细"
+    },
+    "images": {
+        "refresh": "刷新",
+        "pull": "拉取",
+        "search_images": "搜索映像..."
+    },
+    "registrys": {
+        "search_images": "搜索仓库...",
+        "pull": "拉取"
+    }
 }

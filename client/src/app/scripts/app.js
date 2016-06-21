@@ -12,8 +12,17 @@
     ]);
 
     //配置
-    ngApp.config(function($logProvider, $translateProvider, toastrConfig) {
+    ngApp.config(function($provide, $logProvider, $translateProvider, toastrConfig) {
         'ngInject';
+
+        var conf = {};
+        conf.SVR_URL = {
+            base: 'http://ub.home:2375'
+        };
+        $provide.value('CONF', conf);
+
+
+
 
         // Enable log
         $logProvider.debugEnabled(true);

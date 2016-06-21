@@ -1,28 +1,29 @@
 <div class="container text pages containers">
-
     <table class="ui large table">
         <thead>
             <tr>
                 <th>名称</th>
                 <th>监控</th>
-                <th>状态</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="container in containers | orderBy:'Created'">
-            	<td>
-            		<div>{{container.Names[0]}}</div>
-            		<span>{{container.Image}}</span>
-            	</td>
-            	<td>
-            		CPU
-            		RAM
-            	</td>
+                <td>
+                    <div>{{container.Names[0]}}</div>
+                    <span>{{container.Image}}</span>
+                </td>
+                <td>
+                    CPU RAM
+                </td>
                 <td class="collapsing">
                     <div class="ui fitted toggle checkbox">
                         <input type="checkbox">
                         <label></label>
                     </div>
+                    <button class="ui primary button" ui-sref="container({id: container.Id})">
+                        {{'containers.detail'|translate}}
+                    </button>
                 </td>
             </tr>
         </tbody>

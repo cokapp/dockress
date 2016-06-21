@@ -1,0 +1,39 @@
+<div class="container text pages registrys">
+    <div class="search-wrapper">
+        <div class="ui icon input fluid">
+            <input ng-enter="search()" class="prompt" ng-model="term" type="text" placeholder="{{'registrys.search_images'|translate}}">
+            <i ng-click="search()" class="search icon"></i>
+        </div>
+    </div>
+    <table class="ui large table">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>认证</th>
+                <th>描述</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="image in images | orderBy:'star_count'">
+                <td>
+                    <div class="ui label">
+                        {{image.name}}
+                    </div>
+                </td>
+                <td class="certificate">
+                    <i class="iconfont icon-trusted" ng-class="{active: image.is_trusted}"></i>
+                    <i class="iconfont icon-official" ng-class="{active: image.is_official}"></i>
+                </td>
+                <td>
+                    {{image.description}}
+                </td>
+                <td>
+                    <button class="ui primary button" ng-click="create(image.name)">
+                        {{'registrys.pull'|translate}}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
