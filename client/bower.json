@@ -12,7 +12,9 @@
     "angular": "~1.4.2",
     "angular-translate-loader-static-files": "^2.11.0",
     "angular-translate": "^2.11.0",
-    "ng-dialog": "^0.6.2"
+    "ng-dialog": "^0.6.2",
+    "angular-websocket": "^2.0.0",
+    "term.js": "^0.0.7"
   },
   "devDependencies": {},
   "resolutions": {

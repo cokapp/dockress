@@ -8,7 +8,8 @@
         'ngResource',
         'ui.router',
         'toastr',
-        'pascalprecht.translate'
+        'pascalprecht.translate',
+        'ngWebSocket'
     ]);
 
     //配置
