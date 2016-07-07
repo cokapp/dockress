@@ -18,7 +18,7 @@
 
         var conf = {};
         conf.SVR_URL = {
-            base: 'http://ub.home:2375'
+            base: 'http://ct.home:2375'
         };
         $provide.value('CONF', conf);
 
