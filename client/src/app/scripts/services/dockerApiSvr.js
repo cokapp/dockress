@@ -30,11 +30,31 @@
                 cb(rsp);
             });
         };
-        svr.containers_attach = function(id, cb){
+        svr.containers_attach = function(id, cb) {
             var url = dockerUrl + '/containers/' + id + '/attach';
             var p = $http({
                 method: 'POST',
                 url: url
+            });
+            p.success(function(rsp) {
+                cb(rsp);
+            });
+        };
+        svr.containers_exec = function(id, cb) {
+            var url = dockerUrl + '/containers/' + id + '/exec';
+            var p = $http({
+                method: 'POST',
+                url: url,
+                data: {
+                    'AttachStdin': true,
+                    'AttachStdout': true,
+                    'AttachStderr': true,
+                    'DetachKeys': 'ctrl-p,ctrl-q',
+                    'Tty': true,
+                    'Cmd': [
+                        'bash'
+                    ]
+                }
             });
             p.success(function(rsp) {
                 cb(rsp);
@@ -63,7 +83,7 @@
                 cb(rsp);
             });
         };
-        svr.images_create = function(data, cb){
+        svr.images_create = function(data, cb) {
             var url = dockerUrl + '/images/create';
             var p = $http({
                 method: 'POST',
@@ -73,7 +93,8 @@
             p.success(function(rsp) {
                 cb(rsp);
             });
-        }
+        };
+
 
 
         return svr;
