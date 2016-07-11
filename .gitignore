@@ -34,3 +34,4 @@ node_modules
 .settings
 target
 .project
+.idea
