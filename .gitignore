@@ -28,3 +28,9 @@ node_modules
 
 /client/src/_semantic/dist
 /client/src/_semantic/test
+
+
+.classpath
+.settings
+target
+.project
