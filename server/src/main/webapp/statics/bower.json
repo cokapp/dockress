@@ -1,0 +1,10 @@
+{
+  "name": "cokclip",
+  "version": "0.0.1",
+  "dependencies": {
+    "weui": "*",
+    "zepto": "~1.1.6"
+  },
+  "devDependencies": {},
+  "appPath": ""
+}
