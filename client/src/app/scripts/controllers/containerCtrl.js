@@ -12,8 +12,19 @@
         $scope.execStart = false;
         dockerApiSvr.containers_exec($scope.id, function(rsp) {
             var execId = rsp.Id;
-            $scope.execUrl = 'ws://ct.home:2375/exec/' + execId + '/start/ws';
-            $scope.execStart = true;
+
+            //var url = 'http://ct.home:2375/exec/'+execId+'/start';
+
+
+            dockerApiSvr.exec_start(execId, function(rsp2) {
+                console.log('rsp2-------------------------------');
+                console.log(rsp2);
+
+
+
+                //$scope.execUrl = 'ws://ct.home:2375/exec/' + execId + '/start';
+                //$scope.execStart = true;
+            });
         });
 
         //semantic初始化
