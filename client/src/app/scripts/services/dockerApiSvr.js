@@ -45,15 +45,35 @@
             var p = $http({
                 method: 'POST',
                 url: url,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 data: {
-                    'AttachStdin': true,
-                    'AttachStdout': true,
-                    'AttachStderr': true,
-                    'DetachKeys': 'ctrl-p,ctrl-q',
-                    'Tty': true,
-                    'Cmd': [
+                    AttachStdin: true,
+                    AttachStdout: true,
+                    AttachStderr: true,
+                    DetachKeys: 'ctrl-p,ctrl-q',
+                    Tty: true,
+                    Cmd: [
                         'bash'
                     ]
+                }
+            });
+            p.success(function(rsp) {
+                cb(rsp);
+            });
+        };
+        svr.exec_start = function(id, cb) {
+            var url = dockerUrl + '/exec/' + id + '/start';
+            var p = $http({
+                method: 'POST',
+                url: url,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    Detach: false,
+                    Tty: true
                 }
             });
             p.success(function(rsp) {
