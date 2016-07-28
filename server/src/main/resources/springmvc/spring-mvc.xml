@@ -26,13 +26,6 @@
 	<aop:aspectj-autoproxy proxy-target-class="true"
 		expose-proxy="true" />
 
-
-	<!-- 拦截器 -->
-	<mvc:interceptors>
-		<bean class="com.cokapp.quick.core.web.meta.PageMetaInterceptor" />
-	</mvc:interceptors>
-
-
 	<!-- 自动扫描且只扫描@Controller -->
 	<context:component-scan base-package="com.cokapp"
 		use-default-filters="false">
@@ -41,40 +34,6 @@
 		<context:include-filter type="annotation"
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
-
-
-	<!-- 全局异常配置 start -->
-	<bean id="exceptionResolver"
-		class="com.cokapp.quick.core.exception.resolver.GlobalExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				<prop key="org.springframework.beans.TypeMismatchException">errors/404</prop>
-				<prop key="org.springframework.web.servlet.NoHandlerFoundException">errors/404</prop>
-				<prop key="java.lang.Throwable">errors/error</prop>
-			</props>
-		</property>
-		<property name="statusCodes">
-			<props>
-				<prop key="errors/error">500</prop>
-				<prop key="errors/404">404</prop>
-			</props>
-		</property>
-		<property name="exceptionHandlers">
-			<list>
-				<bean
-					class="com.cokapp.quick.core.exception.resolver.BizExceptionResolver" />
-				<bean
-					class="com.cokapp.quick.core.exception.resolver.SqlExceptionResolver" />
-			</list>
-		</property>
-		<!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->
-		<property name="warnLogCategory" value="WARN"></property>
-		<!-- 默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置 -->
-		<property name="defaultErrorView" value="errors/error"></property>
-		<!-- 默认HTTP状态码 -->
-		<property name="defaultStatusCode" value="500"></property>
-	</bean>
-	<!-- 全局异常配置 end -->
 
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
@@ -107,11 +66,6 @@
 	<mvc:resources location="/statics/,/assets/,classpath:/META-INF/assets/"
 		mapping="/statics/**" />
 	<mvc:resources location=".html" mapping="**.html" />
-
-	<!-- springfox -->
-	<bean class="com.cokapp.tongbutie.springfox.SpringFoxConfig"></bean>
-	<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
-	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" />
 
 
 </beans>
