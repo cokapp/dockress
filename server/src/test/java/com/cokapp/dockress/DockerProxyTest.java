@@ -41,14 +41,14 @@ public class DockerProxyTest {
 		//startCmd.withDetach(true).withTty(true).exec(cb).awaitCompletion();
 		
 		
-        InputStream stdin = new ByteArrayInputStream("ls\n".getBytes());
+        InputStream stdin = System.in;
 
         ByteArrayOutputStream stdout = new ByteArrayOutputStream();
 
         ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(containerId)
                 .withAttachStdout(true)
                 .withAttachStdin(true)
-                .withTty(false)
+                .withTty(true)
                 .withCmd("bash").exec();
 
         dockerClient.execStartCmd(execCreateCmdResponse.getId())
