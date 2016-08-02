@@ -1,12 +1,8 @@
 package com.cokapp.dockress.socket.handlers;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
-import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -14,12 +10,9 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import com.cokapp.dockress.docker.DockerManager;
-import com.cokapp.dockress.socket.ios.OnReceiveImpl;
-import com.cokapp.dockress.socket.ios.Receive;
-import com.cokapp.dockress.socket.ios.Send;
+import com.cokapp.dockress.socket.extend.ExecStartResultCallbackExtend;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
-import com.github.dockerjava.core.command.ExecStartResultCallback;
 
 @ServerEndpoint("/exec")
 public class ExecHandler {
@@ -28,26 +21,17 @@ public class ExecHandler {
 	public void onOpen(Session session) throws IOException {
 
 		try {
-            ExecutorService es = Executors.newFixedThreadPool(4);  
-            Send send1 = new Send();  
-            Receive receive1 = new Receive(new OnReceiveImpl());  
-            //连接管道  
-            send1.getOut().connect(receive1.getIn());
-            es.execute(send1);
-            es.execute(receive1);
-	
-            Send send2 = new Send();  
-            Receive receive2 = new Receive(new OnReceiveImpl());  
-            //连接管道  
-            send2.getOut().connect(receive2.getIn());
-            es.execute(send2);
-            es.execute(receive2);
-            
-			PipedInputStream in = receive2.getIn();
-			PipedOutputStream out = send1.getOut();
+			PipedInputStream dest = new PipedInputStream();
+			PipedOutputStream src = new PipedOutputStream();
 
-			session.getUserProperties().put("src", send2.getOut());
-			session.getUserProperties().put("dest", receive2.getIn());
+			//InputReadThead inputReadThead = new InputReadThead(dest);
+
+			PipedInputStream in = new PipedInputStream(src);
+			PipedOutputStream out = new PipedOutputStream(dest);
+
+			session.getUserProperties().put("src", src);
+			session.getUserProperties().put("dest", dest);
+			//session.getUserProperties().put("inputReadThead", inputReadThead);
 
 			DockerClient dockerClient = DockerManager.getDefault();
 			String containerId = "1c27553310d2";
@@ -56,7 +40,7 @@ public class ExecHandler {
 					.withAttachStdin(true).withTty(true).withCmd("bash").exec();
 
 			dockerClient.execStartCmd(execCreateCmdResponse.getId()).withDetach(false).withStdIn(in)
-					.exec(new ExecStartResultCallback(out, out));
+					.exec(new ExecStartResultCallbackExtend(session));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -69,22 +53,19 @@ public class ExecHandler {
 		try {
 			PipedOutputStream src = (PipedOutputStream) session.getUserProperties().get("src");
 			PipedInputStream dest = (PipedInputStream) session.getUserProperties().get("dest");
+			//InputReadThead inputReadThead = (InputReadThead) session.getUserProperties().get("inputReadThead");
 
 			System.out.println("send: " + message);
 
 			src.write(message.getBytes());
+			src.flush();
 
-			//session.getAsyncRemote().sendText();
+			//session.getAsyncRemote().sendText(inputReadThead.getCache());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	private String readString(InputStream in) {
-		@SuppressWarnings("resource")
-		Scanner reader = new Scanner(in);
-		return reader.next();
 	}
 
 }
