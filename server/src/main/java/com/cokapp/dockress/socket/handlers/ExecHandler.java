@@ -20,13 +20,16 @@ public class ExecHandler {
 	@OnOpen
 	public void onOpen(Session session) throws IOException {
 
+		session.setMaxTextMessageBufferSize(1024 * 1024 * 1024);
+		session.setMaxIdleTimeout(1000 * 60 * 60);		
+		
 		try {
-			PipedInputStream dest = new PipedInputStream();
+			PipedInputStream dest = new PipedInputStream(1024 * 1024);
 			PipedOutputStream src = new PipedOutputStream();
 
 			//InputReadThead inputReadThead = new InputReadThead(dest);
 
-			PipedInputStream in = new PipedInputStream(src);
+			PipedInputStream in = new PipedInputStream(src, 1024 * 1024);
 			PipedOutputStream out = new PipedOutputStream(dest);
 
 			session.getUserProperties().put("src", src);
@@ -52,7 +55,7 @@ public class ExecHandler {
 
 		try {
 			PipedOutputStream src = (PipedOutputStream) session.getUserProperties().get("src");
-			PipedInputStream dest = (PipedInputStream) session.getUserProperties().get("dest");
+			//PipedInputStream dest = (PipedInputStream) session.getUserProperties().get("dest");
 			//InputReadThead inputReadThead = (InputReadThead) session.getUserProperties().get("inputReadThead");
 
 			System.out.println("send: " + message);
