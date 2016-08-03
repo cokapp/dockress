@@ -6,7 +6,7 @@
 
         $scope.id = $stateParams.id;
 
-        $scope.attachUrl = 'ws://ct.home:2375/containers/' + $stateParams.id + '/attach/ws?logs=0&stream=1&stdin=1&stdout=1&stderr=1';
+        $scope.attachUrl = 'ws://localhost:9000/attach/' + $stateParams.id;
         $scope.attachStart = true;
 
 

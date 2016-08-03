@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.dockerjava.api.DockerClient;
 
-public class BaseDockerApi {
+public abstract class BaseDockerApi {
 	@Autowired
 	protected DockerClient dockerClient;
 }
