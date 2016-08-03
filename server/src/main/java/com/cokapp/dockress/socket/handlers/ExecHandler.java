@@ -10,9 +10,7 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-import com.cokapp.dockress.docker.DockerManager;
 import com.cokapp.dockress.socket.extend.ExecStartResultCallbackExtend;
-import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 
 /**
@@ -28,7 +26,7 @@ import com.github.dockerjava.api.command.ExecCreateCmdResponse;
  *
  */
 @ServerEndpoint("/exec/{containerId}/{cmd}")
-public class ExecHandler {
+public class ExecHandler extends BaseDockerHandler {
 
 	@OnOpen
 	public void onOpen(Session session, @PathParam(value = "containerId") String containerId,
@@ -40,12 +38,10 @@ public class ExecHandler {
 			PipedInputStream in = new PipedInputStream(src);
 			session.getUserProperties().put("src", src);
 
-			DockerClient dockerClient = DockerManager.getDefault();
-
-			ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(containerId).withAttachStdout(true)
+			ExecCreateCmdResponse execCreateCmdResponse = this.getDockerClient().execCreateCmd(containerId).withAttachStdout(true)
 					.withAttachStdin(true).withTty(true).withCmd(cmd).exec();
 
-			dockerClient.execStartCmd(execCreateCmdResponse.getId()).withDetach(false).withStdIn(in)
+			this.getDockerClient().execStartCmd(execCreateCmdResponse.getId()).withDetach(false).withStdIn(in)
 					.exec(new ExecStartResultCallbackExtend(session));
 		} catch (Exception e) {
 			e.printStackTrace();
