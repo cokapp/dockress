@@ -18,7 +18,7 @@
 
         var conf = {};
         conf.SVR_URL = {
-            base: 'http://ct.home:2375'
+            base: 'http://localhost:9000/docker'
         };
         $provide.value('CONF', conf);
 

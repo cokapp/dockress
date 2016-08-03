@@ -10,7 +10,7 @@
         $scope.attachStart = true;
 
 
-        $scope.execUrl = 'ws://localhost:9000/exec';
+        $scope.execUrl = 'ws://localhost:9000/exec/' + $stateParams.id + '/bash';
         $scope.execStart = true;
 
         //semantic初始化

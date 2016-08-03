@@ -21,10 +21,16 @@ public class ExecStartResultCallbackExtend extends ExecStartResultCallback {
 
 		String next = new String(frame.getPayload());
 
-		System.out.println("===============next: " + next);
+		switch (frame.getStreamType()) {
+		case STDOUT:
+		case RAW:
+			break;
+		case STDERR:
+		default:
+			next += "*********ERROR*********";
+		}
 
 		session.getAsyncRemote().sendText(next);
-
 	}
 
 }

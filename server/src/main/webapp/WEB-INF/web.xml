@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 
-	<display-name>api-seed</display-name>
+	<display-name>dockress</display-name>
 
 
 	<!-- Begin Spring根上下文 -->
@@ -58,5 +58,13 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-
+	<filter>
+		<filter-name>crosFilter</filter-name>
+		<filter-class>com.cokapp.dockress.web.utils.SimpleCORSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>crosFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 </web-app>

@@ -35,37 +35,5 @@
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 
-	<bean id="freemarkerConfig"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPaths">
-			<list>
-				<value>/WEB-INF/freemarker</value>
-			</list>
-		</property>
-		<property name="preferFileSystemAccess" value="false" />
-		<property name="freemarkerSettings">
-			<props>
-				<prop key="defaultEncoding">UTF-8</prop>
-			</props>
-		</property>
-	</bean>
-	<!-- Freemarker视图配置 -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		<property name="cache" value="false" />
-		<property name="prefix" value="" />
-		<property name="suffix" value=".ftl" />
-		<property name="contentType" value="text/html;charset=UTF-8"></property>
-		<property name="requestContextAttribute" value="request" />
-		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="exposeRequestAttributes" value="true" />
-		<property name="exposeSessionAttributes" value="true" />
-	</bean>
-
-	<!-- 静态文件映射 -->
-	<mvc:resources location="/statics/,/assets/,classpath:/META-INF/assets/"
-		mapping="/statics/**" />
-	<mvc:resources location=".html" mapping="**.html" />
-
 
 </beans>

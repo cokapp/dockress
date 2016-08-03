@@ -21,12 +21,21 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath*:/app.properties</value>
+				<value>classpath*:/*.properties</value>
 			</list>
 		</property>
 	</bean>
 
 	<aop:aspectj-autoproxy proxy-target-class="true"
 		expose-proxy="true" />
+
+	<bean id="springContextUtils" class="com.cokapp.dockress.web.utils.SpringContextUtils"></bean>
+
+
+	<!-- docker java -->
+	<bean id="dockerClientFactory" class="com.cokapp.dockress.docker.DockerClientFactory"></bean>
+	<bean id="dockerClient" factory-bean="dockerClientFactory"
+		factory-method="buildDefault">
+	</bean>
 
 </beans>

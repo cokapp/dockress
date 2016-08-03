@@ -7,6 +7,7 @@ import java.io.PipedOutputStream;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 import com.cokapp.dockress.docker.DockerManager;
@@ -14,57 +15,49 @@ import com.cokapp.dockress.socket.extend.ExecStartResultCallbackExtend;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 
-@ServerEndpoint("/exec")
+/**
+ * 进入容器
+ * 
+ * @Description: TODO
+ * @Copyright: Copyright (c) 2015
+ * @Company:杭州爱财网络科技有限公司
+ * @author heichengliang@aixuedai.com
+ * @version V1.0.0
+ * @since JDK 1.7
+ * @date 2016年8月3日 上午10:14:08
+ *
+ */
+@ServerEndpoint("/exec/{containerId}/{cmd}")
 public class ExecHandler {
 
 	@OnOpen
-	public void onOpen(Session session) throws IOException {
-
+	public void onOpen(Session session, @PathParam(value = "containerId") String containerId,
+			@PathParam(value = "cmd") String cmd) throws IOException {
 		session.setMaxTextMessageBufferSize(1024 * 1024 * 1024);
-		session.setMaxIdleTimeout(1000 * 60 * 60);		
-		
+		session.setMaxIdleTimeout(1000 * 60 * 60);
 		try {
-			PipedInputStream dest = new PipedInputStream(1024 * 1024);
 			PipedOutputStream src = new PipedOutputStream();
-
-			//InputReadThead inputReadThead = new InputReadThead(dest);
-
-			PipedInputStream in = new PipedInputStream(src, 1024 * 1024);
-			PipedOutputStream out = new PipedOutputStream(dest);
-
+			PipedInputStream in = new PipedInputStream(src);
 			session.getUserProperties().put("src", src);
-			session.getUserProperties().put("dest", dest);
-			//session.getUserProperties().put("inputReadThead", inputReadThead);
 
 			DockerClient dockerClient = DockerManager.getDefault();
-			String containerId = "1c27553310d2";
 
 			ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(containerId).withAttachStdout(true)
-					.withAttachStdin(true).withTty(true).withCmd("bash").exec();
+					.withAttachStdin(true).withTty(true).withCmd(cmd).exec();
 
 			dockerClient.execStartCmd(execCreateCmdResponse.getId()).withDetach(false).withStdIn(in)
 					.exec(new ExecStartResultCallbackExtend(session));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@OnMessage
 	public void onMessage(Session session, String message) {
-
 		try {
 			PipedOutputStream src = (PipedOutputStream) session.getUserProperties().get("src");
-			//PipedInputStream dest = (PipedInputStream) session.getUserProperties().get("dest");
-			//InputReadThead inputReadThead = (InputReadThead) session.getUserProperties().get("inputReadThead");
-
-			System.out.println("send: " + message);
-
 			src.write(message.getBytes());
 			src.flush();
-
-			//session.getAsyncRemote().sendText(inputReadThead.getCache());
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
