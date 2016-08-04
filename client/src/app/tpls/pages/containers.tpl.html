@@ -2,28 +2,36 @@
     <table class="ui large table">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>名称</th>
-                <th>监控</th>
+                <th>镜像</th>
                 <th>操作</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="container in containers | orderBy:'Created'">
                 <td>
-                    <div>{{container.Names[0]}}</div>
-                    <span>{{container.Image}}</span>
+                    <a ui-sref="container({id: container.Id})">{{container.Id | limitTo : 12}}</a>
                 </td>
                 <td>
-                    CPU RAM
+                    {{container.Names[0]}}</div>
+                </td>
+                <td>     
+                    {{container.Image}}
                 </td>
                 <td class="collapsing">
-                    <div class="ui fitted toggle checkbox">
-                        <input type="checkbox">
-                        <label></label>
+                    <div ng-if="container.Status.startsWith('Exited')">
+                        <div class="ui toggle checkbox" title="启动">
+                            <input type="checkbox" ng-click="start(container.Id)">
+                            <label></label>
+                        </div>
                     </div>
-                    <button class="ui primary button" ui-sref="container({id: container.Id})">
-                        {{'containers.detail'|translate}}
-                    </button>
+                    <div ng-if="!container.Status.startsWith('Exited')">
+                        <div class="ui toggle checkbox" title="停止">
+                            <input type="checkbox" ng-click="stop(container.Id)" checked>
+                            <label></label>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </tbody>
