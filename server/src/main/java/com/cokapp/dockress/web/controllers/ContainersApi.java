@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cokapp.quick.core.web.view.JsonResult;
+import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Container;
 
 @Controller
@@ -37,5 +38,13 @@ public class ContainersApi extends BaseDockerApi {
 		dockerClient.stopContainerCmd(containerId).exec();
 
 		return JsonResult.newSuccess("处理成功!");
+	}
+
+	@RequestMapping(value = { "/{containerId}/json" }, method = { RequestMethod.GET })
+	@ResponseBody
+	public JsonResult<InspectContainerResponse> inspect(@PathVariable(value = "containerId") String containerId) {
+		InspectContainerResponse inspectContainerResponse = dockerClient.inspectContainerCmd(containerId).exec();
+
+		return JsonResult.newSuccess(inspectContainerResponse);
 	}
 }

@@ -1,10 +1,25 @@
 (function() {
     'use strict';
 
-    ngApp.controller('containerCtrl', function($scope, $stateParams, $element, dockerApiSvr) {
+    ngApp.controller('containerCtrl', function($scope, $stateParams, $element, $websocket, dockerApiSvr) {
         'ngInject';
 
-        $scope.id = $stateParams.id;
+        var containerId = $scope.containerId = $stateParams.id;
+
+        var statsUrl = 'ws://localhost:9000/stats/' + containerId;
+
+        var ws = $websocket(statsUrl);
+        ws.onMessage(function(message) {
+            $scope.stats = $.parseJSON(message.data);
+        });
+
+
+
+
+
+
+
+
 
         $scope.attachUrl = 'ws://localhost:9000/attach/' + $stateParams.id;
         $scope.attachStart = true;
@@ -17,6 +32,15 @@
         $element.find('.tabular.menu > .item').tab();
 
 
+
+        reload();
+
+
+        function reload() {
+            dockerApiSvr.containers_inspect($scope.containerId, function(rsp) {
+                $scope.container = rsp.data;
+            });
+        }
 
     });
 
