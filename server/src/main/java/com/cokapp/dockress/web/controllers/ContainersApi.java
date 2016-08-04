@@ -16,7 +16,7 @@ public class ContainersApi extends BaseDockerApi{
 	@RequestMapping(value = { "/json" }, method = { RequestMethod.GET })
 	@ResponseBody
 	public List<Container> json() {
-		List<Container> lists = dockerClient.listContainersCmd().exec();
+		List<Container> lists = dockerClient.listContainersCmd().withShowAll(true).exec();
 		return lists;
 	}
 

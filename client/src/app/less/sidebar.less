@@ -1,0 +1,42 @@
+@app-sidebar-width: 12rem;
+@app-sidebar-item-height: 3rem;
+@app-sidebar-color-bg: #3B4253;
+@app-sidebar-color-pointer: #5EA3F8;
+@app-sidebar-color-pointer-width: 5px;
+.app-sidebar {
+    .flex-sidebar;
+    width: @app-sidebar-width;
+    background: @app-sidebar-color-bg;
+    .logo{
+    	color: @color-font-active;
+    	font-size: 1.8rem;
+    	height: 4rem;
+    	line-height: 4rem;
+    	text-indent: 1rem;
+    }
+    .nav-vertical {
+        .item {
+            height: @app-sidebar-item-height;
+            line-height: @app-sidebar-item-height;
+            padding-left: 2rem;
+            &.active {
+                a {
+                    color: @color-font-active;
+                    margin-left: -@app-sidebar-color-pointer-width;
+                }
+                border-left: @app-sidebar-color-pointer-width solid @app-sidebar-color-pointer;
+            }
+            &:hover,
+            &.active {
+                background: darken(@app-sidebar-color-bg, 3%);
+            }
+            a {
+                display: block;
+                color: lighten(@app-sidebar-color-bg, 40%);
+                i.icon{
+                	margin-right: 1rem;
+                }
+            }
+        }
+    }
+}

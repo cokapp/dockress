@@ -1,10 +1,11 @@
 {
     "header": {
-        "overview": "概览",
+        "overview": "总览",
         "containers": "容器",
         "images": "映像",
         "registrys": "仓库",
-        "nodes": "节点"
+        "nodes": "节点",
+        "search": "搜索容器、镜像"
     },
     "containers": {
         "detail": "明细"

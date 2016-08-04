@@ -19,7 +19,7 @@ gulp.task('styles', function() {
 });
 
 var buildStyles = function() {
-    var appLess = path.join(conf.paths.src, '/app/less/main.less');
+    var appLess = path.join(conf.paths.src, '/app/less/_app.less');
 
     var lessOptions = {
         options: [

@@ -1,0 +1,40 @@
+@color-bg-main: #EEEEEE;
+@color-bg-light: #F8FAFD;
+@color-font: #A2ABBD;
+@color-font-active: #FFFFFF;
+body {
+    background: @color-bg-main;
+    .flex;
+}
+
+ul,
+ol,
+li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+//工具类
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+    /*IE/7/6*/
+}
+
+
+/**
+ * 以下用于styles任务中进行注入
+ */
+
+// injector
+// endinjector
