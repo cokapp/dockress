@@ -1,10 +1,6 @@
-<div class="ui top fixed menu app-header" ng-controller="headerCtrl">
-    <div class="header item">
-        Dockress
+<div class="app-header">
+    <div class="ui left icon input fluid">
+        <input class="search prompt" type="text" placeholder="{{'header.search'|translate}}">
+        <i class="search icon"></i>
     </div>
-    <a ui-sref="overview" class="item" ng-class="{active :isActive('^/$')}"><i class="dashboard layout icon"></i> {{'header.overview'|translate}}</a>
-    <a ui-sref="containers" class="item" ng-class="{active :isActive('/containers|/container')}"><i class="cubes  icon"></i> {{'header.containers'|translate}}</a>
-    <a ui-sref="images" class="item" ng-class="{active :isActive('/images')}"><i class="database icon"></i> {{'header.images'|translate}}</a>
-    <a ui-sref="registrys" class="item" ng-class="{active :isActive('/registrys')}"><i class="cloud icon"></i> {{'header.registrys'|translate}}</a>
-    <a ui-sref="nodes" class="item" ng-class="{active :isActive('/nodes')}"><i class="sitemap icon"></i> {{'header.nodes'|translate}}</a>
 </div>

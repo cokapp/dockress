@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    ngApp.controller('headerCtrl', function($scope, $location) {
+    ngApp.controller('navCtrl', function($scope, $location) {
         'ngInject';
 
         $scope.isActive = function(path) {
