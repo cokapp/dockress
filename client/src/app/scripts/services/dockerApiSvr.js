@@ -50,6 +50,16 @@
                 cb(rsp);
             });
         };
+        svr.containers_inspect = function(id, cb) {
+            var url = dockerUrl + '/containers/' + id + '/json';
+            var p = $http({
+                method: 'GET',
+                url: url
+            });
+            p.success(function(rsp) {
+                cb(rsp);
+            });
+        };
         svr.exec_start = function(id, cb) {
             var url = dockerUrl + '/exec/' + id + '/start';
             var p = $http({

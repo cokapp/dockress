@@ -2,7 +2,7 @@
     "header": {
         "overview": "总览",
         "containers": "容器",
-        "images": "映像",
+        "images": "镜像",
         "registrys": "仓库",
         "nodes": "节点",
         "search": "搜索容器、镜像"
