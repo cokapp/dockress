@@ -4,9 +4,14 @@
     ngApp.controller('imagesCtrl', function($scope, dockerApiSvr) {
         'ngInject';
 
-        dockerApiSvr.images(function(rsp) {
-            $scope.images = rsp;
-        });
+        reload();
+
+        function reload() {
+            dockerApiSvr.images(function(rsp) {
+                $scope.images = rsp.data;
+            });
+        }
+
     });
 
 })();

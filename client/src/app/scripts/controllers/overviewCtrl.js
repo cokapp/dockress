@@ -12,7 +12,7 @@
             });
         });
         dockerApiSvr.containers(function(rsp) {
-            $scope.containers = rsp;
+            $scope.containers = rsp.data;
         });
 
 

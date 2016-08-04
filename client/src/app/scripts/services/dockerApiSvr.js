@@ -30,8 +30,8 @@
                 cb(rsp);
             });
         };
-        svr.containers_attach = function(id, cb) {
-            var url = dockerUrl + '/containers/' + id + '/attach';
+        svr.containers_start = function(id, cb) {
+            var url = dockerUrl + '/containers/' + id + '/start';
             var p = $http({
                 method: 'POST',
                 url: url
@@ -40,24 +40,11 @@
                 cb(rsp);
             });
         };
-        svr.containers_exec = function(id, cb) {
-            var url = dockerUrl + '/containers/' + id + '/exec';
+        svr.containers_stop = function(id, cb) {
+            var url = dockerUrl + '/containers/' + id + '/stop';
             var p = $http({
                 method: 'POST',
-                url: url,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: {
-                    AttachStdin: true,
-                    AttachStdout: true,
-                    AttachStderr: true,
-                    DetachKeys: 'ctrl-p,ctrl-q',
-                    Tty: true,
-                    Cmd: [
-                        'bash'
-                    ]
-                }
+                url: url
             });
             p.success(function(rsp) {
                 cb(rsp);
