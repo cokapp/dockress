@@ -9,7 +9,7 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-import com.cokapp.dockress.socket.extend.ExecStartResultCallbackExtend;
+import com.cokapp.dockress.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.api.command.AttachContainerCmd;
 
 @ServerEndpoint("/attach/{containerId}")
@@ -25,7 +25,7 @@ public class AttachHandler extends BaseDockerHandler{
 			session.getUserProperties().put("src", src);
 
 			AttachContainerCmd attachContainerCmd = this.getDockerClient().attachContainerCmd(containerId).withStdIn(in);		
-			attachContainerCmd.exec(new ExecStartResultCallbackExtend(session));
+			attachContainerCmd.exec(new ExecStartResultCallback(session));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

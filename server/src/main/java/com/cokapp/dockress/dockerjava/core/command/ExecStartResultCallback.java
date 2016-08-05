@@ -1,15 +1,14 @@
-package com.cokapp.dockress.socket.extend;
+package com.cokapp.dockress.dockerjava.core.command;
 
 import javax.websocket.Session;
 
 import com.github.dockerjava.api.model.Frame;
-import com.github.dockerjava.core.command.ExecStartResultCallback;
 
-public class ExecStartResultCallbackExtend extends ExecStartResultCallback {
+public class ExecStartResultCallback extends com.github.dockerjava.core.command.ExecStartResultCallback {
 
 	private Session session;
 
-	public ExecStartResultCallbackExtend(Session session) {
+	public ExecStartResultCallback(Session session) {
 		this.session = session;
 	}
 
