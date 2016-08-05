@@ -1,4 +1,4 @@
-package com.cokapp.dockress.socket.extend;
+package com.cokapp.dockress.dockerjava.core.async;
 
 import javax.websocket.Session;
 
@@ -6,12 +6,12 @@ import com.cokapp.cokits.util.mapper.JsonMapper;
 import com.github.dockerjava.api.model.Statistics;
 import com.github.dockerjava.core.async.ResultCallbackTemplate;
 
-public class StatsResultCallbackExtend extends ResultCallbackTemplate<StatsResultCallbackExtend, Statistics> {
+public class StatsResultCallback extends ResultCallbackTemplate<StatsResultCallback, Statistics> {
 	private Session session;
 
 	private final static String SESSION_KEY = "stats-result";
 
-	public StatsResultCallbackExtend(Session session) {
+	public StatsResultCallback(Session session) {
 		this.session = session;
 		this.session.getUserProperties().put(SESSION_KEY, this);
 	}
@@ -22,8 +22,8 @@ public class StatsResultCallbackExtend extends ResultCallbackTemplate<StatsResul
 		session.getAsyncRemote().sendText(statisJson);
 	}
 
-	public static StatsResultCallbackExtend getInstance(Session session) {
-		return (StatsResultCallbackExtend) session.getUserProperties().get(SESSION_KEY);
+	public static StatsResultCallback getInstance(Session session) {
+		return (StatsResultCallback) session.getUserProperties().get(SESSION_KEY);
 	}
 
 }

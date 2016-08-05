@@ -8,7 +8,7 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-import com.cokapp.dockress.socket.extend.StatsResultCallbackExtend;
+import com.cokapp.dockress.dockerjava.core.async.StatsResultCallback;
 
 @ServerEndpoint("/stats/{containerId}")
 public class StatsHandler extends BaseDockerHandler {
@@ -18,7 +18,7 @@ public class StatsHandler extends BaseDockerHandler {
 		session.setMaxTextMessageBufferSize(1024 * 1024 * 1024);
 		session.setMaxIdleTimeout(1000 * 60 * 60);
 		try {
-			this.getDockerClient().statsCmd(containerId).exec(new StatsResultCallbackExtend(session));
+			this.getDockerClient().statsCmd(containerId).exec(new StatsResultCallback(session));		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -27,7 +27,7 @@ public class StatsHandler extends BaseDockerHandler {
 	@OnClose
 	public void onClose(Session session) throws IOException {
 		try {
-			StatsResultCallbackExtend.getInstance(session).close();
+			StatsResultCallback.getInstance(session).close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -8,10 +8,19 @@
                 {{container.State.Status}}
             </li>
             <li class="cpu">
-                {{stats.cpu_stats.cpu_usage.total_usage / stats.cpu_stats.system_cpu_usage}}
+                {{stats.overview.cpu_percent | number:2}}%
             </li>
             <li class="ram">
-                {{stats.memory_stats.usage | FileSize}} / {{stats.memory_stats.limit | FileSize}}
+                {{stats.overview.memory_percent | number:2}}%
+                {{stats.memory_stats.usage | FileSize:1:1000}} of {{stats.memory_stats.limit | FileSize:1:1000}}
+            </li>
+            <li class="net">
+                上行：{{stats.overview.networks_up_speed | FileSize:2:1000}}
+                下行：{{stats.overview.networks_down_speed | FileSize:2:1000}}
+            </li>
+            <li class="net-total">
+                上行吞吐量：{{stats.overview.networks_up | FileSize:2:1000}}
+                下行吞吐量：{{stats.overview.networks_down | FileSize:2:1000}}
             </li>
 
         </ul>
@@ -22,7 +31,7 @@
             <a class="item" data-tab="exec">Exec</a>
         </div>
         <div class="ui bottom attached tab segment active" data-tab="attach">
-            <div ng-term url="attachUrl" start="attachStart"></div>
+            <div ng-term2 url="attachUrl" start="attachStart"></div>
         </div>
         <div class="ui bottom attached tab segment" data-tab="exec">
             <div ng-term url="execUrl" start="execStart"></div>

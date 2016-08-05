@@ -20,17 +20,10 @@
                     {{container.Image}}
                 </td>
                 <td class="collapsing">
-                    <div ng-if="container.Status.startsWith('Exited')">
-                        <div class="ui toggle checkbox" title="启动">
-                            <input type="checkbox" ng-click="start(container.Id)">
-                            <label></label>
-                        </div>
-                    </div>
-                    <div ng-if="!container.Status.startsWith('Exited')">
-                        <div class="ui toggle checkbox" title="停止">
-                            <input type="checkbox" ng-click="stop(container.Id)" checked>
-                            <label></label>
-                        </div>
+                    {{container.State}}
+                    <div class="ui toggle checkbox" title="{{ {running: '停止容器', exited: '启动容器'}[container.State] }}">
+                        <input type="checkbox" ng-click="switch($event, container)" ng-model="container.State" ng-true-value="'running'" ng-false-value="'exited'">
+                        <label></label>
                     </div>
                 </td>
             </tr>

@@ -10,7 +10,7 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
-import com.cokapp.dockress.socket.extend.ExecStartResultCallbackExtend;
+import com.cokapp.dockress.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.api.command.ExecCreateCmdResponse;
 
 /**
@@ -42,7 +42,7 @@ public class ExecHandler extends BaseDockerHandler {
 					.withAttachStdin(true).withTty(true).withCmd(cmd).exec();
 
 			this.getDockerClient().execStartCmd(execCreateCmdResponse.getId()).withDetach(false).withStdIn(in)
-					.exec(new ExecStartResultCallbackExtend(session));
+					.exec(new ExecStartResultCallback(session));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
