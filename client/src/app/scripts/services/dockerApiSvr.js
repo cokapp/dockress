@@ -1,10 +1,18 @@
 (function() {
     'use strict';
 
-    ngApp.factory('dockerApiSvr', function($http, CONF) {
+    ngApp.factory('dockerApiSvr', function($rootScope, $http, CONF) {
         'ngInject';
 
         var dockerUrl = CONF.SVR_URL.base;
+
+        $rootScope.cancelEvent = function(event) {
+            console.log('cancelEvent');
+            var event = event || window.event; //用于IE  
+            if (event.preventDefault) event.preventDefault(); //标准技术  
+            if (event.returnValue) event.returnValue = false; //IE  
+            return false; //用于处理使用对象属性注册的处理程序  
+        }
 
 
         var svr = {};
