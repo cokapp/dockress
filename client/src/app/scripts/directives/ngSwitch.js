@@ -28,10 +28,7 @@
                 return html;
             },
             link: function(scope, element, attrs) {
-
-
-                console.log(scope.disabled);
-
+                
                 scope.onClick = function($event) {
 
                     if(scope.disabled){

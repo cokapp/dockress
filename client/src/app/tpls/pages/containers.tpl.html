@@ -5,6 +5,7 @@
                 <th>ID</th>
                 <th>名称</th>
                 <th>镜像</th>
+                <th>状态</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -18,6 +19,10 @@
                 </td>
                 <td>     
                     {{container.Image}}
+                </td>
+                <td>     
+                    {{'containers.' + container.State|translate}}<br>
+                    {{'containers.' + container.Status|translate}}
                 </td>
                 <td class="collapsing">
                     <div ng-switch disabled="{'changing': true}[container.State]" ng-before-change="switch($event, container)" ng-data="container" ng-model="container.State" ng-true-value="'running'" ng-false-value="'exited'"></div>

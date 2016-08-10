@@ -8,7 +8,11 @@
         "search": "搜索容器、镜像"
     },
     "containers": {
-        "detail": "明细"
+        "detail": "明细",
+        "exited": "已停止",
+        "running": "运行中",
+        "exited": "已停止",
+        "Up (.*) hours": "超过 {{1}} 小时"
     },
     "images": {
         "refresh": "刷新",
