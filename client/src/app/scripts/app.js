@@ -44,6 +44,8 @@
 		    suffix: '.json'
 		});
 
+        $translateProvider.useMissingTranslationHandler('regexTranslationHandler');
+
     });
 
     //启动

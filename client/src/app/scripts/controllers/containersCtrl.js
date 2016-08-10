@@ -29,13 +29,13 @@
         //启动容器
         function start(container) {
             dockerApiSvr.containers_start(container.Id, function(rsp) {
-                container.State = 'running';
+                reload();
             });
         }
         //停止容器
         function stop(container) {
             dockerApiSvr.containers_stop(container.Id, function(rsp) {
-                container.State = 'exited';
+                reload();
             });
         }
 
