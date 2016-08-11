@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    ngApp.controller('imagesCtrl', function($scope, dockerApiSvr) {
+    ngApp.controller('imageListCtrl', function($scope, dockerApiSvr) {
         'ngInject';
 
         reload();

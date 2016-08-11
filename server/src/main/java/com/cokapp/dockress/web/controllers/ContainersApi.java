@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cokapp.dockress.dockerjava.api.model.ContainerCreateVo;
 import com.cokapp.quick.core.web.view.JsonResult;
+import com.github.dockerjava.api.command.CreateContainerCmd;
+import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Container;
 
@@ -38,6 +41,21 @@ public class ContainersApi extends BaseDockerApi {
 		dockerClient.stopContainerCmd(containerId).exec();
 
 		return JsonResult.newSuccess("处理成功!");
+	}
+
+	@RequestMapping(value = { "/create/{imageId}" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public JsonResult<CreateContainerResponse> create(@PathVariable(value = "imageId") String imageId,
+			ContainerCreateVo containerCreateVo) {
+		
+		CreateContainerCmd cmd = dockerClient.createContainerCmd(imageId);
+
+		cmd.withName(containerCreateVo.getName());
+		cmd.withPortBindings(containerCreateVo.getPortBindings());
+		cmd.withBinds(containerCreateVo.getBinds());
+		cmd.withEnv(containerCreateVo.getEnvs());
+
+		return JsonResult.newSuccess(cmd.exec());
 	}
 
 	@RequestMapping(value = { "/{containerId}/json" }, method = { RequestMethod.GET })
