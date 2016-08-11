@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    ngApp.controller('containerCtrl', function($scope, $stateParams, $element, $websocket, dockerApiSvr) {
+    ngApp.controller('containerDetailCtrl', function($scope, $stateParams, $element, $websocket, dockerApiSvr) {
         'ngInject';
 
         var containerId = $scope.containerId = $stateParams.id;

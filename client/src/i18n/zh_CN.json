@@ -11,8 +11,18 @@
         "detail": "明细",
         "exited": "已停止",
         "running": "运行中",
-        "exited": "已停止",
-        "Up (.*) hours": "超过 {{1}} 小时"
+        "changing": "变动中",
+        "Up Less than a second": "刚刚",
+        "Up (.*) seconds": "超过 {{1}} 秒",
+        "Up About a minute": "大概一分钟",
+        "Up (.*) minutes": "超过 {{1}} 分钟",
+        "Up (.*) hours": "超过 {{1}} 小时",
+        "Exited \\(.*\\) Less than a second ago": "刚刚",
+        "Exited \\(.*\\) (.*) seconds ago": "{{1}} 秒以前",
+        "Exited \\(.*\\) About a minute ago": "大概一分钟以前",
+        "Exited \\(.*\\) (.*) minutes ago": "{{1}}分钟以前",
+        "Exited \\(.*\\) (.*) hours ago": "{{1}}小时以前",
+        "Exited \\(.*\\) (.*) weeks ago": "{{1}} 周以前"
     },
     "images": {
         "refresh": "刷新",

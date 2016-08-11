@@ -10,15 +10,10 @@
                     templateUrl: 'app/tpls/pages/overview.tpl.html',
                     controller: 'overviewCtrl'
                 })
-                .state('containers', {
-                    url: '/containers',
-                    templateUrl: 'app/tpls/pages/containers.tpl.html',
-                    controller: 'containersCtrl'
-                })
-                .state('images', {
-                    url: '/images',
-                    templateUrl: 'app/tpls/pages/images.tpl.html',
-                    controller: 'imagesCtrl'
+                .state('image', {
+                    url: '/image',
+                    templateUrl: 'app/tpls/pages/image/list.tpl.html',
+                    controller: 'imageListCtrl'
                 })
                 .state('registrys', {
                     url: '/registrys',
@@ -31,9 +26,19 @@
                     controller: 'nodesCtrl'
                 })
                 .state('container', {
+                    url: '/container',
+                    templateUrl: 'app/tpls/pages/container/list.tpl.html',
+                    controller: 'containerListCtrl'
+                })
+                .state('containerDetail', {
                     url: '/container/{id}',
-                    templateUrl: 'app/tpls/pages/container.tpl.html',
-                    controller: 'containerCtrl'
+                    templateUrl: 'app/tpls/pages/container/detail.tpl.html',
+                    controller: 'containerDetailCtrl'
+                })
+                .state('containerCreate', {
+                    url: '/container/create/{imageId}',
+                    templateUrl: 'app/tpls/pages/container/create.tpl.html',
+                    controller: 'containerCreateCtrl'
                 });
 
             $urlRouterProvider.otherwise('/');

@@ -12,7 +12,7 @@
         <tbody>
             <tr ng-repeat="container in containers | orderBy:'Created'">
                 <td>
-                    <a ui-sref="container({id: container.Id})">{{container.Id | limitTo : 12}}</a>
+                    <a ui-sref="containerDetail({id: container.Id})">{{container.Id | limitTo : 12}}</a>
                 </td>
                 <td>
                     {{container.Names[0]}}</div>
@@ -21,10 +21,10 @@
                     {{container.Image}}
                 </td>
                 <td>     
-                    {{'containers.' + container.State|translate}}<br>
-                    {{'containers.' + container.Status|translate}}
+                    <div class="ui label">{{'containers.' + container.State|translate}}</div><br>
+                    <span class="small">{{'containers.' + container.Status|translate}}</span>
                 </td>
-                <td class="collapsing">
+                <td>
                     <div ng-switch disabled="{'changing': true}[container.State]" ng-before-change="switch($event, container)" ng-data="container" ng-model="container.State" ng-true-value="'running'" ng-false-value="'exited'"></div>
                 </td>
             </tr>
