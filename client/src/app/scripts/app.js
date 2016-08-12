@@ -2,14 +2,15 @@
     'use strict';
 
     //定义应用
-    window.ngApp = angular.module('ngseed', [
+    window.ngApp = angular.module('dockress', [
         'ngCookies',
         'ngTouch',
         'ngResource',
         'ui.router',
         'toastr',
         'pascalprecht.translate',
-        'ngWebSocket'
+        'ngWebSocket',
+        'highcharts-ng'
     ]);
 
     //配置

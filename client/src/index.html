@@ -1,6 +1,7 @@
 <!doctype html>
-<html ng-app="ngseed">
+<html ng-app="dockress">
   <head>
+    <base href="/">
     <meta charset="utf-8">
     <title>Dockress</title>
     <meta name="description" content="">
@@ -29,8 +30,12 @@
     <![endif]-->
 
     <div ng-include="'app/tpls/public/sidebar.tpl.html'" include-replace></div>
-    <div ng-include="'app/tpls/public/main.tpl.html'" include-replace></div>
-
+    <div class="app-main">
+        <div ng-include="'app/tpls/public/header.tpl.html'" include-replace></div>
+        <div class="app-content" ui-view></div>
+        <div ng-include="'app/tpls/public/footer.tpl.html'" include-replace></div>
+    </div>
+    
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- 使用wiredep自动插入 -->

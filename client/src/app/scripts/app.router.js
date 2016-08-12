@@ -1,9 +1,10 @@
 (function() {
     'use strict';
 
-    ngApp.config(function($stateProvider, $urlRouterProvider) {
+    ngApp.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
             'ngInject';
-            
+            //$locationProvider.html5Mode(true);
+
             $stateProvider
                 .state('overview', {
                     url: '/',

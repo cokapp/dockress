@@ -1,3 +1,53 @@
 <div class="app-container-create">
-{{imageId}}
+    {{imageId}}
+    <div class="ui grid">
+        <div class="sixteen wide column">
+            <section class="name">
+                <div class="ui form">
+                    <div class="field">
+                        <label>名称</label>
+                        <input type="text" ng-model="containerCreateVo.name">
+                    </div>
+                    <div class="field">
+                        <label>执行命令</label>
+                        <input type="text" ng-model="containerCreateVo.cmd">
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="eight wide column">
+            <section class="port-bindings">
+                <table class="ui table">
+                    <thead>
+                        <tr>
+                            <th>容器端口</th>
+                            <th>协议</th>
+                            <th>主机端口</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="portBinding in containerCreateVo.portBindings">
+                            <td>
+                                {{portBinding.exposedPort.port}}
+                            </td>
+                            <td>
+                                {{portBinding.exposedPort.protocol}}
+                            </td>
+                            <td>     
+                                {{portBinding.binding.hostPortSpec}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div class="eight wide column">
+            <section class="binds">
+            </section>
+        </div>
+        <div class="eight wide column">
+            <section class="env">
+            </section>
+        </div>
+    </div>
 </div>

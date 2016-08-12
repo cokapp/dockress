@@ -4,6 +4,9 @@
     ngApp.controller('imageListCtrl', function($scope, dockerApiSvr) {
         'ngInject';
 
+console.log('imageListCtrl');
+
+
         reload();
 
         function reload() {

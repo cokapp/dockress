@@ -16,6 +16,7 @@
         "Up (.*) seconds": "超过 {{1}} 秒",
         "Up About a minute": "大概一分钟",
         "Up (.*) minutes": "超过 {{1}} 分钟",
+        "Up About an hour": "大概一小时",
         "Up (.*) hours": "超过 {{1}} 小时",
         "Exited \\(.*\\) Less than a second ago": "刚刚",
         "Exited \\(.*\\) (.*) seconds ago": "{{1}} 秒以前",

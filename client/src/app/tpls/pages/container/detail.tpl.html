@@ -1,4 +1,4 @@
-<div class="app-container">
+<div class="app-container-detail">
     <div class="head">
         {{container.Name}}
     </div>
@@ -7,18 +7,23 @@
             <li class="status">
                 {{container.State.Status}}
             </li>
-            <li class="cpu">
+            <li class="item cpu">
                 {{stats.overview.cpu_percent | number:2}}%
+
+                <highchart id="cpu_percent_chart" config="stats.overview.cpu_percent_chart"></highchart>
+
             </li>
-            <li class="ram">
+            <li class="item ram">
                 {{stats.overview.memory_percent | number:2}}%
                 {{stats.memory_stats.usage | FileSize:1:1000}} of {{stats.memory_stats.limit | FileSize:1:1000}}
+                <highchart id="memory_percent_chart" config="stats.overview.memory_percent_chart"></highchart>
+
             </li>
-            <li class="net">
+            <li class="item net">
                 上行：{{stats.overview.networks_up_speed | FileSize:2:1000}}
                 下行：{{stats.overview.networks_down_speed | FileSize:2:1000}}
             </li>
-            <li class="net-total">
+            <li class="item net-total">
                 上行吞吐量：{{stats.overview.networks_up | FileSize:2:1000}}
                 下行吞吐量：{{stats.overview.networks_down | FileSize:2:1000}}
             </li>

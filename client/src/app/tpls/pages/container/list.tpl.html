@@ -15,13 +15,13 @@
                     <a ui-sref="containerDetail({id: container.Id})">{{container.Id | limitTo : 12}}</a>
                 </td>
                 <td>
-                    {{container.Names[0]}}</div>
+                    {{container.Names[0]}}
                 </td>
                 <td>     
                     {{container.Image}}
                 </td>
                 <td>     
-                    <div class="ui label">{{'containers.' + container.State|translate}}</div><br>
+                    <div class="ui label" ng-class="{'running':'green', 'exited':'red'}[container.State]">{{'containers.' + container.State|translate}}</div><br>
                     <span class="small">{{'containers.' + container.Status|translate}}</span>
                 </td>
                 <td>

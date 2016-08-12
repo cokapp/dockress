@@ -13,6 +13,7 @@ import com.cokapp.quick.core.web.view.JsonResult;
 import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
+import com.github.dockerjava.api.command.UpdateContainerCmd;
 import com.github.dockerjava.api.model.Container;
 
 @Controller
@@ -57,6 +58,21 @@ public class ContainersApi extends BaseDockerApi {
 
 		return JsonResult.newSuccess(cmd.exec());
 	}
+	
+	@RequestMapping(value = { "/edit/{containerId}" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public void edit(@PathVariable(value = "containerId") String containerId,
+			ContainerCreateVo containerCreateVo) {
+
+		
+		UpdateContainerCmd cmd = dockerClient.updateContainerCmd(containerId);
+		
+		
+		
+		
+		
+	}	
+	
 
 	@RequestMapping(value = { "/{containerId}/json" }, method = { RequestMethod.GET })
 	@ResponseBody

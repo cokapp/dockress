@@ -6,6 +6,8 @@
 
         var imageId = $scope.imageId = $stateParams.imageId;
 
+        $scope.containerCreateVo = {};
+
 
     });
 
