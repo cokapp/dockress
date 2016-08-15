@@ -1,28 +1,58 @@
 @app-container-detail-item-width: 160px;
+@app-container-detail-chart-title-height: 50px;
+@app-container-detail-font-color: #666;
+@app-container-detail-font-color-second: #AAA;
 
-.app-container-detail{
-	.item{
-		width: @app-container-detail-item-width;
-		height: @app-container-detail-item-width;
-	}
-	.chart-title{
-		color: #AAA;
-		width: 100px;
-		height: 60px;
-		margin-top: -30px;
-		text-align: center;
-		strong{
-			font-size: 1.5rem;
-			color: #666;
-			sub{
-				color: #AAA;
-			}
-		}
-		p{
-			font-size: 0.9rem;
-		}
-	}
-
-
-
+.app-container-detail {
+    .overview {
+        .item {
+            width: @app-container-detail-item-width;
+            height: @app-container-detail-item-width;
+            float: left;
+            margin-right: 5px;
+            &.status {
+                text-align: center;
+                display: table;
+                div {
+                    display: table-cell;
+                    vertical-align: middle;
+                    line-height: 1.5;
+                    strong {
+                        font-size: 2rem;
+                        display: block;
+                        &.green {
+                            color: green;
+                        }
+                        &.red {
+                            color: red;
+                        }
+                        i {
+                        	font-weight: normal;
+                            font-size: 2rem;
+                        }
+                    }
+                    span {
+                    	color: @app-container-detail-font-color-second;
+                    }
+                }
+            }
+        }
+        .chart-title {
+            color: @app-container-detail-font-color-second;
+            width: 100px;
+            height: @app-container-detail-chart-title-height;
+            margin-top: -@app-container-detail-chart-title-height/2;
+            text-align: center;
+            strong {
+                font-size: 1.5rem;
+                color: @app-container-detail-font-color;
+                sub {
+                    color: @app-container-detail-font-color-second;
+                }
+            }
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    }
 }

@@ -3,31 +3,28 @@
         {{container.Name}}
     </div>
     <div class="overview">
-        <ul>
-            <li class="status">
-                {{container.State.Status}}
+        <ul class="clearfix">
+            <li class="item status">
+                <div>
+                    <strong ng-class="{'running':'green', 'exited':'red'}[container.State.Status]">
+                        <i class="iconfont"  ng-class="{'running':'icon-right', 'exited':'icon-error'}[container.State.Status]"></i> 
+                        {{'container.detail.' + container.State.Status|translate}}
+                    </strong>
+                    <span>容器状态</span>
+                </div>
             </li>
             <li class="item cpu">
-                {{stats.overview.cpu_percent | number:2}}%
-
-                <highchart id="cpu_percent_chart" config="stats.overview.cpu_percent_chart"></highchart>
-
+                <highchart ng-if="stats.overview.cpu_percent_chart" config="stats.overview.cpu_percent_chart"></highchart>
             </li>
             <li class="item ram">
-                {{stats.overview.memory_percent | number:2}}%
-                {{stats.memory_stats.usage | FileSize:1:1000}} of {{stats.memory_stats.limit | FileSize:1:1000}}
-                <highchart id="memory_percent_chart" config="stats.overview.memory_percent_chart"></highchart>
-
+                <highchart ng-if="stats.overview.memory_percent_chart" config="stats.overview.memory_percent_chart"></highchart>
             </li>
             <li class="item net">
-                上行：{{stats.overview.networks_up_speed | FileSize:2:1000}}
-                下行：{{stats.overview.networks_down_speed | FileSize:2:1000}}
+                上行：{{stats.overview.networks_up_speed | FileSize:2:1000}} 下行：{{stats.overview.networks_down_speed | FileSize:2:1000}}
             </li>
             <li class="item net-total">
-                上行吞吐量：{{stats.overview.networks_up | FileSize:2:1000}}
-                下行吞吐量：{{stats.overview.networks_down | FileSize:2:1000}}
+                上行吞吐量：{{stats.overview.networks_up | FileSize:2:1000}} 下行吞吐量：{{stats.overview.networks_down | FileSize:2:1000}}
             </li>
-
         </ul>
     </div>
     <div class="text pages">
