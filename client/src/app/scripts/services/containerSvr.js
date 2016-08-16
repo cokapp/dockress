@@ -10,7 +10,7 @@
 
         svr.countStats = function(stats, queue) {
             if (typeof queue === 'undefined') {
-                queue = svr.StatsQueue.create(5);
+                queue = svr.StatsQueue.create(8);
             }
             queue.add(stats);
 
@@ -23,8 +23,10 @@
                 var queue = utilSvr.Queue.create(size);
 
                 queue.count = function() {
-                    var stats = queue.stats = $.extend(true, {}, queue.last());
-                    stats.overview = {};
+                    queue.stats = queue.stats || {
+                        overview: {}
+                    };
+                    var stats = $.extend(true, queue.stats, queue.last());
 
                     //计算CPU
                     calcCpu(stats);
@@ -54,12 +56,12 @@
             overview.cpu_percent = 100 * overview.cpu_use / overview.cpu_sys;
 
             //图表
-            var percent = $.extend(true, {}, CHART);
-            percent.title.text = '<div class="chart-title"><strong>' + $filter('number')(overview.cpu_percent, 2) + '<sub> %</sub></strong><p>CPU使用率<span></p>';
-            percent.series[0].data[0].y = overview.cpu_use;
-            percent.series[0].data[1].y = overview.cpu_sys - overview.cpu_use;
+            var chart = $.extend(true, {}, CHART_PIE);
+            chart.title.text = '<div class="chart-title"><strong>' + $filter('number')(overview.cpu_percent, 2) + '<sub> %</sub></strong><p>CPU使用率<span></p>';
+            chart.series[0].data[0].y = overview.cpu_use;
+            chart.series[0].data[1].y = overview.cpu_sys - overview.cpu_use;
 
-            overview.cpu_percent_chart = percent;
+            overview.cpu_percent_chart = chart;
         }
         //RAM
         function calcRam(stats) {
@@ -68,12 +70,12 @@
             overview.memory_percent = 100 * stats.memory_stats.usage / stats.memory_stats.limit;
 
             //图表
-            var percent = $.extend(true, {}, CHART);
-            percent.title.text = '<div class="chart-title"><strong>' + $filter('FileSize')(stats.memory_stats.usage, 1, 1000, true) + '</strong><p>内存使用量<span></p>';
-            percent.series[0].data[0].y = stats.memory_stats.usage;
-            percent.series[0].data[1].y = stats.memory_stats.limit - stats.memory_stats.usage;
+            var chart = $.extend(true, {}, CHART_PIE);
+            chart.title.text = '<div class="chart-title"><strong>' + $filter('FileSize')(stats.memory_stats.usage, 1, 1000, true) + '</strong><p>内存使用量<span></p>';
+            chart.series[0].data[0].y = stats.memory_stats.usage;
+            chart.series[0].data[1].y = stats.memory_stats.limit - stats.memory_stats.usage;
 
-            overview.memory_percent_chart = percent;
+            overview.memory_percent_chart = chart;
         }
         //网络状态
         function calcNet(stats, queue) {
@@ -86,10 +88,24 @@
             var lastNet = sumNet(lastStats);
 
             var ts = Date.parse(lastStats.read) - Date.parse(firstStats.read);
+            overview.networks_read = lastStats.read;
             overview.networks_up_speed = 1000 * (lastNet[0] - firstNet[0]) / ts;
             overview.networks_down_speed = 1000 * (lastNet[1] - firstNet[1]) / ts;
             overview.networks_up = lastNet[0];
             overview.networks_down = lastNet[1];
+
+            //图表
+            var time = Date.parse(overview.networks_read);
+            var xNum = 10;
+
+            var speed_chart = $.extend(true, queue.stats.overview.networks_speed_chart, CHART_AREA);
+
+            //addNetPoint(speed_chart.series[0].data, xNum, time, overview.networks_up_speed);
+            addNetPoint(speed_chart.series[1].data, xNum, time, overview.networks_down_speed);
+
+
+            //overview.networks_chart = chart;
+            overview.networks_speed_chart = speed_chart;
         };
 
         function sumNet(stats) {
@@ -102,14 +118,32 @@
             return netStats;
         };
 
-        var CHART = {
+        function addNetPoint(series, num, time, speed) {
+            // console.log('=========================');
+            // console.log(series);
+            while (series.length < num) {
+                series.push({ x: time - (num - 2 - series.length) * 1000, y: 0 });
+            }
+            if (series.length == num) {
+                series.shift();
+            }
+
+            //series.shift();
+            series.push({
+                x: time,
+                y: speed
+            });
+        };
+
+        var CHART_PIE = {
             options: {
                 chart: {
                     type: 'pie',
                     spacing: [0, 0, 0, 0],
                     margin: [0, 0, 0, 0],
                     height: 160,
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'transparent',
+                    events: {}
                 },
                 tooltip: {
                     enabled: false
@@ -154,8 +188,51 @@
                 }]
             }]
         };
-
-
+        var CHART_AREA = {
+            options: {
+                chart: {
+                    type: 'line',
+                    animation: Highcharts.svg,
+                    spacing: [0, 0, 0, 0],
+                    margin: [0, 0, 0, 0],
+                    height: 160,
+                    backgroundColor: 'transparent',
+                    events: {}
+                },
+                title: {
+                    text: null
+                },
+                tooltip: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        animation: false,
+                        dataLabels: {
+                            enabled: false
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                }
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPosition: 'inside'
+            },
+            series: [{
+                name: 'up',
+                data: []
+            }, {
+                name: 'down',
+                data: []
+            }]
+        };
 
 
         return svr;

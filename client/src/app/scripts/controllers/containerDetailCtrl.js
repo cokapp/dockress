@@ -8,8 +8,9 @@
         var statsUrl = 'ws://localhost:9000/stats/' + containerId;
 
         var ws = $websocket(statsUrl);
-        
-        var statsQueue;
+
+        var statsQueue = undefined;
+
         ws.onMessage(function(message) {
             statsQueue = containerSvr.countStats($.parseJSON(message.data), statsQueue);
             $scope.stats = statsQueue.stats;
@@ -39,7 +40,14 @@
             dockerApiSvr.containers_inspect($scope.containerId, function(rsp) {
                 $scope.container = rsp.data;
             });
-        }
+        };
+
+
+        $scope.$on('$destroy', function() {
+            statsQueue = undefined;
+            ws.close();
+        });
+
 
     });
 
