@@ -99,10 +99,11 @@
             var xNum = 10;
 
             var speed_chart = $.extend(true, queue.stats.overview.networks_speed_chart, CHART_AREA);
+            //speed_chart.series[0].name = '发送（'+ $filter('FileSize')(overview.networks_up_speed, 1, 1000, true) +'/s）';
+            //speed_chart.series[1].name = '接收（'+ $filter('FileSize')(overview.networks_down_speed, 1, 1000, true) +'/s）';
 
-            //addNetPoint(speed_chart.series[0].data, xNum, time, overview.networks_up_speed);
+            addNetPoint(speed_chart.series[0].data, xNum, time, overview.networks_up_speed);
             addNetPoint(speed_chart.series[1].data, xNum, time, overview.networks_down_speed);
-
 
             //overview.networks_chart = chart;
             overview.networks_speed_chart = speed_chart;
@@ -119,16 +120,9 @@
         };
 
         function addNetPoint(series, num, time, speed) {
-            // console.log('=========================');
-            // console.log(series);
-            while (series.length < num) {
-                series.push({ x: time - (num - 2 - series.length) * 1000, y: 0 });
-            }
             if (series.length == num) {
                 series.shift();
             }
-
-            //series.shift();
             series.push({
                 x: time,
                 y: speed
@@ -193,14 +187,22 @@
                 chart: {
                     type: 'line',
                     animation: Highcharts.svg,
-                    spacing: [0, 0, 0, 0],
-                    margin: [0, 0, 0, 0],
                     height: 160,
                     backgroundColor: 'transparent',
                     events: {}
                 },
                 title: {
                     text: null
+                },
+                legend: {
+                    floating: true,
+                    align: 'right',
+                    verticalAlign: 'top',
+                    labelFormatter: function(){
+                        //var lastData = this.data[9];
+                        //return this.name + '(' + lastData + ')';
+                        return this.name;
+                    }
                 },
                 tooltip: {
                     enabled: false
@@ -212,6 +214,9 @@
                             enabled: false
                         },
                         enableMouseTracking: false
+                    },
+                    line: {
+                        lineWidth: 1
                     }
                 },
                 credits: {
@@ -222,8 +227,12 @@
                 }
             },
             xAxis: {
-                type: 'datetime',
-                tickPosition: 'inside'
+                type: 'datetime'
+            },
+            yAxis: {
+                title: {
+                    text: '速度'
+                }
             },
             series: [{
                 name: 'up',
@@ -233,7 +242,6 @@
                 data: []
             }]
         };
-
 
         return svr;
     });
