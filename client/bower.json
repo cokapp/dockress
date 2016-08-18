@@ -17,7 +17,8 @@
     "term.js": "^0.0.7",
     "sockjs-client": "^1.1.1",
     "highcharts-ng": "^0.0.12",
-    "highcharts": "^4.2.6"
+    "highcharts": "^4.2.6",
+    "angular-sanitize": "^1.5.8"
   },
   "devDependencies": {},
   "resolutions": {

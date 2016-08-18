@@ -79,6 +79,10 @@
         }
         //网络状态
         function calcNet(stats, queue) {
+            if (queue.getRealSize() <= 1) {
+                return;
+            }
+
             var overview = stats.overview;
 
             var firstStats = $.extend(true, {}, queue.first());
@@ -96,16 +100,12 @@
 
             //图表
             var time = Date.parse(overview.networks_read);
-            var xNum = 10;
+            var xNum = 5;
 
             var speed_chart = $.extend(true, queue.stats.overview.networks_speed_chart, CHART_AREA);
-            //speed_chart.series[0].name = '发送（'+ $filter('FileSize')(overview.networks_up_speed, 1, 1000, true) +'/s）';
-            //speed_chart.series[1].name = '接收（'+ $filter('FileSize')(overview.networks_down_speed, 1, 1000, true) +'/s）';
-
             addNetPoint(speed_chart.series[0].data, xNum, time, overview.networks_up_speed);
             addNetPoint(speed_chart.series[1].data, xNum, time, overview.networks_down_speed);
 
-            //overview.networks_chart = chart;
             overview.networks_speed_chart = speed_chart;
         };
 
@@ -119,11 +119,19 @@
             return netStats;
         };
 
-        function addNetPoint(series, num, time, speed) {
-            if (series.length == num) {
-                series.shift();
+        function addNetPoint(seriesData, num, time, speed) {
+
+            while (seriesData.length < num) {
+                seriesData.push({
+                    x: time - (num - seriesData.length) * 1000,
+                    y: 0
+                });
             }
-            series.push({
+
+            if (seriesData.length == num) {
+                seriesData.shift();
+            }
+            seriesData.push({
                 x: time,
                 y: speed
             });
@@ -198,9 +206,7 @@
                     floating: true,
                     align: 'right',
                     verticalAlign: 'top',
-                    labelFormatter: function(){
-                        //var lastData = this.data[9];
-                        //return this.name + '(' + lastData + ')';
+                    labelFormatter: function() {
                         return this.name;
                     }
                 },
@@ -231,14 +237,14 @@
             },
             yAxis: {
                 title: {
-                    text: '速度'
+                    text: '网络带宽'
                 }
             },
             series: [{
-                name: 'up',
+                name: '发送',
                 data: []
             }, {
-                name: 'down',
+                name: '接收',
                 data: []
             }]
         };

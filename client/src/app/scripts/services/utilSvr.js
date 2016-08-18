@@ -39,6 +39,12 @@
                 queue.getAll = function() {
                     return ds;
                 };
+                queue.getSize = function(){
+                    return size;
+                };
+                queue.getRealSize = function(){
+                    return idx;
+                };
 
                 return queue;
             }

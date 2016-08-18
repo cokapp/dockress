@@ -6,6 +6,7 @@
         'ngCookies',
         'ngTouch',
         'ngResource',
+        'ngSanitize',
         'ui.router',
         'toastr',
         'pascalprecht.translate',
