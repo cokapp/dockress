@@ -6,7 +6,25 @@
 
         var imageId = $scope.imageId = $stateParams.imageId;
 
-        $scope.containerCreateVo = {};
+        $scope.containerCreateVo = {
+            portBindings: []
+        };
+
+
+        $scope.addPortBinding = function() {
+            $scope.containerCreateVo.portBindings.push({
+                exposedPort: {
+                    protocol: 'tcp',
+                    port: null
+                },
+                binding: {
+                    hostPortSpec: null
+                }
+            });
+        };
+        $scope.removePortBinding = function(idx){
+        	$scope.containerCreateVo.portBindings.splice(idx, 1);
+        };
 
 
     });

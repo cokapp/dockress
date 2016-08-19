@@ -1,7 +1,10 @@
 <div class="app-container-create">
-    {{imageId}}
+    <div class="head">
+        <i class="cubes icon"></i> <strong>启动容器{{imageId}}</strong>
+        <br> {{containerCreateVo}}
+    </div>
     <div class="ui grid">
-        <div class="sixteen wide column">
+        <div class="eight wide column">
             <section class="name">
                 <div class="ui form">
                     <div class="field">
@@ -17,28 +20,44 @@
         </div>
         <div class="eight wide column">
             <section class="port-bindings">
-                <table class="ui table">
-                    <thead>
-                        <tr>
-                            <th>容器端口</th>
-                            <th>协议</th>
-                            <th>主机端口</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="portBinding in containerCreateVo.portBindings">
-                            <td>
-                                {{portBinding.exposedPort.port}}
-                            </td>
-                            <td>
-                                {{portBinding.exposedPort.protocol}}
-                            </td>
-                            <td>     
-                                {{portBinding.binding.hostPortSpec}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="ui form">
+                    <table class="ui table">
+                        <thead>
+                            <tr>
+                                <th>容器端口</th>
+                                <th>协议</th>
+                                <th>主机端口</th>
+                                <th>删除</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="portBinding in containerCreateVo.portBindings track by $index">
+                                <td>
+                                    <div class="field">
+                                        <input type="text" ng-model="portBinding.exposedPort.port"></input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="field">
+                                        <select class="ui fluid dropdown" ng-model="portBinding.exposedPort.protocol">
+                                            <option value="tcp">TCP</option>
+                                            <option value="udp">UDP</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="field">
+                                        <input type="text" ng-model="portBinding.binding.hostPortSpec"></input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ui button orange" ng-click="removePortBinding($index)">移除</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="ui button fluid primary" ng-click="addPortBinding()">添加服务端口</div>
+                </div>
             </section>
         </div>
         <div class="eight wide column">
