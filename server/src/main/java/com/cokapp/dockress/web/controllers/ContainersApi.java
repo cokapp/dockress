@@ -3,6 +3,7 @@ package com.cokapp.dockress.web.controllers;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +14,6 @@ import com.cokapp.quick.core.web.view.JsonResult;
 import com.github.dockerjava.api.command.CreateContainerCmd;
 import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.InspectContainerResponse;
-import com.github.dockerjava.api.command.UpdateContainerCmd;
 import com.github.dockerjava.api.model.Container;
 
 @Controller
@@ -47,14 +47,14 @@ public class ContainersApi extends BaseDockerApi {
 	@RequestMapping(value = { "/create/{imageId}" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public JsonResult<CreateContainerResponse> create(@PathVariable(value = "imageId") String imageId,
-			ContainerCreateVo containerCreateVo) {
+			@ModelAttribute ContainerCreateVo containerCreateVo) {
 		
 		CreateContainerCmd cmd = dockerClient.createContainerCmd(imageId);
 
 		cmd.withName(containerCreateVo.getName());
 		cmd.withPortBindings(containerCreateVo.getPortBindings());
 		cmd.withBinds(containerCreateVo.getBinds());
-		cmd.withEnv(containerCreateVo.getEnvs());
+		cmd.withEnv(containerCreateVo.getEnvList());
 
 		return JsonResult.newSuccess(cmd.exec());
 	}
@@ -65,7 +65,7 @@ public class ContainersApi extends BaseDockerApi {
 			ContainerCreateVo containerCreateVo) {
 
 		
-		UpdateContainerCmd cmd = dockerClient.updateContainerCmd(containerId);
+		//UpdateContainerCmd cmd = dockerClient.updateContainerCmd(containerId);
 		
 		
 		

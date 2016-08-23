@@ -5,6 +5,7 @@
     </div>
     <div class="ui grid">
         <div class="eight wide column">
+            <h4>基础设置</h4>
             <section class="name">
                 <div class="ui form">
                     <div class="field">
@@ -19,6 +20,7 @@
             </section>
         </div>
         <div class="eight wide column">
+            <h4>端口绑定</h4>
             <section class="port-bindings">
                 <div class="ui form">
                     <table class="ui table">
@@ -27,14 +29,14 @@
                                 <th>容器端口</th>
                                 <th>协议</th>
                                 <th>主机端口</th>
-                                <th>删除</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="portBinding in containerCreateVo.portBindings track by $index">
                                 <td>
                                     <div class="field">
-                                        <input type="text" ng-model="portBinding.exposedPort.port"></input>
+                                        <input type="number" step="1" ng-model="portBinding.exposedPort.port"></input>
                                     </div>
                                 </td>
                                 <td>
@@ -47,7 +49,7 @@
                                 </td>
                                 <td>
                                     <div class="field">
-                                        <input type="text" ng-model="portBinding.binding.hostPortSpec"></input>
+                                        <input type="number" step="1" ng-model="portBinding.binding.hostPortSpec"></input>
                                     </div>
                                 </td>
                                 <td>
@@ -56,7 +58,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="ui button fluid primary" ng-click="addPortBinding()">添加服务端口</div>
+                    <div class="ui button fluid primary" ng-class="{disabled: !portBindingsValidate()}" ng-click="addPortBinding()">添加服务端口</div>
                 </div>
             </section>
         </div>
@@ -65,8 +67,41 @@
             </section>
         </div>
         <div class="eight wide column">
+            <h4>环境变量</h4>
             <section class="env">
+                <div class="ui form">
+                    <table class="ui table">
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>值</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="env in containerCreateVo.envs track by $index">
+                                <td>
+                                    <div class="field">
+                                        <input type="text" ng-model="env.name"></input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="field">
+                                        <input type="text" ng-model="env.value"></input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ui button orange" ng-click="removeEnv($index)">移除</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="ui button fluid primary" ng-class="{disabled: !envsValidate()}" ng-click="addEnv()">添加环境变量</div>
+                </div>
             </section>
+        </div>
+        <div class="sixteen wide column">
+            <div class="ui button fluid primary" ng-click="create()">提交</div>
         </div>
     </div>
 </div>

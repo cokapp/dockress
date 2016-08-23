@@ -10,15 +10,33 @@
 
         svr.countStats = function(stats, queue) {
             if (typeof queue === 'undefined') {
-                queue = svr.StatsQueue.create(8);
+                queue = StatsQueue.create(8);
             }
             queue.add(stats);
-
             return queue.count();
         };
 
+        svr.create = function(containerCreateVo, cb){
+            var url = dockerUrl + '/containers/create/' + containerCreateVo.imageId;
+            var p = $http({
+                method: 'POST',
+                url: url,
+                data: containerCreateVo
+            });
+            p.success(function(rsp) {
+                cb(rsp);
+            });
+        };
 
-        svr.StatsQueue = {
+
+
+
+
+
+
+        //===================以下私有方法=======================
+       
+        var StatsQueue = {
             create: function(size) {
                 var queue = utilSvr.Queue.create(size);
 
@@ -41,11 +59,6 @@
                 return queue;
             }
         };
-
-
-
-
-        //===================以下私有方法=======================
 
         //CPU
         function calcCpu(stats) {
