@@ -17,7 +17,7 @@
         };
 
         svr.create = function(containerCreateVo, cb){
-            var url = dockerUrl + '/containers/create/' + containerCreateVo.imageId;
+            var url = dockerUrl + '/containers/create';
             var p = $http({
                 method: 'POST',
                 url: url,

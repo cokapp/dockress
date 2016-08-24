@@ -39,6 +39,8 @@
         function reload() {
             dockerApiSvr.containers_inspect($scope.containerId, function(rsp) {
                 $scope.container = rsp.data;
+
+                console.log($scope.container);
             });
         };
 

@@ -2,8 +2,7 @@ package com.cokapp.dockress.dockerjava.api.model;
 
 import java.util.List;
 
-import com.cokapp.cokits.core.lang.util.ArrayUtils;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.PortBinding;
 import com.google.common.collect.Lists;
@@ -17,21 +16,42 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ContainerCreateVo {
 
+	private String imageId;
 	private String name;
-	private List<Bind> binds;
-	private List<PortBinding> portBindings;
-	private List<ObjectNode> envs;
+	private List<BindVo> binds;
+	private List<PortBindingVo> portBindings;
+	private List<EnvVo> envs;
 
+	@JsonIgnore
 	public List<String> getEnvList() {
-		if (envs == null) {
-			return null;
-		}
-
 		List<String> list = Lists.newArrayList();
-		for (ObjectNode env : envs) {
-			list.add(ArrayUtils.join(new Object[] { env.get("name"), env.get("value") }, " "));
+		if (envs != null) {
+			for (EnvVo env : envs) {
+				list.add(env.toEnv());
+			}
 		}
-		
+		return list;
+	}
+
+	@JsonIgnore
+	public List<Bind> getBindList() {
+		List<Bind> list = Lists.newArrayList();
+		if (binds != null) {
+			for (BindVo bind : binds) {
+				list.add(bind.toBind());
+			}
+		}
+		return list;
+	}
+
+	@JsonIgnore
+	public List<PortBinding> getPortBindingList() {
+		List<PortBinding> list = Lists.newArrayList();
+		if (portBindings != null) {
+			for (PortBindingVo portBinding : portBindings) {
+				list.add(portBinding.toPortBinding());
+			}
+		}
 		return list;
 	}
 

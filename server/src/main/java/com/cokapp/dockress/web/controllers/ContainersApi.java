@@ -3,8 +3,8 @@ package com.cokapp.dockress.web.controllers;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,35 +44,28 @@ public class ContainersApi extends BaseDockerApi {
 		return JsonResult.newSuccess("处理成功!");
 	}
 
-	@RequestMapping(value = { "/create/{imageId}" }, method = { RequestMethod.POST })
+	@RequestMapping(value = { "/create" }, method = { RequestMethod.POST })
 	@ResponseBody
-	public JsonResult<CreateContainerResponse> create(@PathVariable(value = "imageId") String imageId,
-			@ModelAttribute ContainerCreateVo containerCreateVo) {
-		
-		CreateContainerCmd cmd = dockerClient.createContainerCmd(imageId);
+	public JsonResult<CreateContainerResponse> create(@RequestBody ContainerCreateVo containerCreateVo) {
+
+		CreateContainerCmd cmd = dockerClient.createContainerCmd(containerCreateVo.getImageId());
 
 		cmd.withName(containerCreateVo.getName());
-		cmd.withPortBindings(containerCreateVo.getPortBindings());
-		cmd.withBinds(containerCreateVo.getBinds());
+		cmd.withPortBindings(containerCreateVo.getPortBindingList());
+		cmd.withBinds(containerCreateVo.getBindList());
 		cmd.withEnv(containerCreateVo.getEnvList());
 
 		return JsonResult.newSuccess(cmd.exec());
 	}
-	
+
 	@RequestMapping(value = { "/edit/{containerId}" }, method = { RequestMethod.POST })
 	@ResponseBody
-	public void edit(@PathVariable(value = "containerId") String containerId,
-			ContainerCreateVo containerCreateVo) {
+	public void edit(@PathVariable(value = "containerId") String containerId, ContainerCreateVo containerCreateVo) {
 
-		
-		//UpdateContainerCmd cmd = dockerClient.updateContainerCmd(containerId);
-		
-		
-		
-		
-		
-	}	
-	
+		// UpdateContainerCmd cmd =
+		// dockerClient.updateContainerCmd(containerId);
+
+	}
 
 	@RequestMapping(value = { "/{containerId}/json" }, method = { RequestMethod.GET })
 	@ResponseBody

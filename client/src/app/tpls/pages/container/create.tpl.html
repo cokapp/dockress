@@ -36,12 +36,12 @@
                             <tr ng-repeat="portBinding in containerCreateVo.portBindings track by $index">
                                 <td>
                                     <div class="field">
-                                        <input type="number" step="1" ng-model="portBinding.exposedPort.port"></input>
+                                        <input type="number" step="1" ng-model="portBinding.port"></input>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="field">
-                                        <select class="ui fluid dropdown" ng-model="portBinding.exposedPort.protocol">
+                                        <select class="ui fluid dropdown" ng-model="portBinding.protocol">
                                             <option value="tcp">TCP</option>
                                             <option value="udp">UDP</option>
                                         </select>
@@ -49,7 +49,7 @@
                                 </td>
                                 <td>
                                     <div class="field">
-                                        <input type="number" step="1" ng-model="portBinding.binding.hostPortSpec"></input>
+                                        <input type="number" step="1" ng-model="portBinding.hostPort"></input>
                                     </div>
                                 </td>
                                 <td>
