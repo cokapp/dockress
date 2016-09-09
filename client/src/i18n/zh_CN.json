@@ -10,7 +10,8 @@
     "container": {
         "detail": {
             "exited": "已停止",
-            "running": "运行中"
+            "running": "运行中",
+            "created": "已创建"
         }
     },
     "containers": {

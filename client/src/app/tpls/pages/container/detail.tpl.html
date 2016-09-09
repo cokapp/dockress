@@ -23,7 +23,7 @@
                 <highchart ng-if="stats.overview.networks_speed_chart" config="stats.overview.networks_speed_chart"></highchart>
             </li>
             <li class="item net-total">
-                <div>
+                <div ng-if="stats.overview.networks_down">
                     <div>
                         <p ng-bind-html="stats.overview.networks_down | FileSize:2:1000:true"></p>
                         <span>网络吞吐 ( 接收 )</span>

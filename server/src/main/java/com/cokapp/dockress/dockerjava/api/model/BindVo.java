@@ -13,11 +13,15 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class BindVo {
 	private String path;
-	private AccessMode accessMode;
+	private Boolean readOnly;
 	private String hostPath;
 
 	public Bind toBind() {
-		Bind bind = new Bind(hostPath, new Volume(path), accessMode);
+		Bind bind = new Bind(hostPath, new Volume(path), AccessMode.fromBoolean(!readOnly));
 		return bind;
+	}
+	public Volume toVolume() {
+		Volume volume = new Volume(path);
+		return volume;
 	}
 }

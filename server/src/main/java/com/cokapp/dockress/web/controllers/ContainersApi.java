@@ -52,6 +52,7 @@ public class ContainersApi extends BaseDockerApi {
 
 		cmd.withName(containerCreateVo.getName());
 		cmd.withPortBindings(containerCreateVo.getPortBindingList());
+		cmd.withVolumes(containerCreateVo.getVolumesList());
 		cmd.withBinds(containerCreateVo.getBindList());
 		cmd.withEnv(containerCreateVo.getEnvList());
 

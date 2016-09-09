@@ -19,8 +19,8 @@
                 ngFalseValue: '=',
 
 
-                ngBeforeChange: '&',
-                ngAfterChange: '&'
+                ngBeforeChange: '&?',
+                ngAfterChange: '&?'
             },
             template: function(element, attrs) {
                 var html = '<span class="switch" ng-click="onClick($event)" ng-class="{checked: checked, disabled: disabled}"><small></small><input type="checkbox" ng-model="' + attrs.ngModel + '" style="display:none" /></span>';
@@ -35,14 +35,18 @@
                         return;
                     }
 
-                    if (!scope.ngBeforeChange($event, scope.ngData)) {
-                        return;
+                    if (scope.ngBeforeChange) {
+                        if(!scope.ngBeforeChange($event, scope.ngData)){
+                            return;
+                        }
                     };
 
                     calc();
                     refresh();
 
-                    scope.ngAfterChange($event, scope.ngData);
+                    if(scope.ngAfterChange){
+                        scope.ngAfterChange($event, scope.ngData);
+                    }
                 };
 
                 scope.$watch('ngModel', function() {

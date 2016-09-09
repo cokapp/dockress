@@ -119,6 +119,16 @@
                 cb(rsp);
             });
         };
+        svr.images_inspect = function(id, cb) {
+            var url = dockerUrl + '/images/' + id + '/json';
+            var p = $http({
+                method: 'GET',
+                url: url
+            });
+            p.success(function(rsp) {
+                cb(rsp);
+            });
+        };
 
 
 

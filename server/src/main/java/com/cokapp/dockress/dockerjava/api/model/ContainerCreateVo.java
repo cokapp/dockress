@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.dockerjava.api.model.Bind;
 import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Volume;
 import com.google.common.collect.Lists;
 
 import lombok.Getter;
@@ -43,7 +44,17 @@ public class ContainerCreateVo {
 		}
 		return list;
 	}
-
+	@JsonIgnore
+	public List<Volume> getVolumesList() {
+		List<Volume> list = Lists.newArrayList();
+		if (binds != null) {
+			for (BindVo bind : binds) {
+				list.add(bind.toVolume());
+			}
+		}
+		return list;
+	}
+	
 	@JsonIgnore
 	public List<PortBinding> getPortBindingList() {
 		List<PortBinding> list = Lists.newArrayList();
@@ -53,6 +64,6 @@ public class ContainerCreateVo {
 			}
 		}
 		return list;
-	}
-
+	}	
+	
 }

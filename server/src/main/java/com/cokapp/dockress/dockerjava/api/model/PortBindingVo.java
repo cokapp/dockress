@@ -15,8 +15,8 @@ public class PortBindingVo {
 	private int hostPort;
 	
 	public PortBinding toPortBinding() {
-		// 127.0.0.1:80:8080/tcp
-		String serialized = "127.0.0.1:" + port + ":" + hostPort + "/" + protocol;
+		// 0.0.0.0:80:8080/tcp
+		String serialized = "0.0.0.0:" + hostPort + ":" + port + "/" + protocol;
 		PortBinding portBinding = PortBinding.parse(serialized);
 		return portBinding;
 	}

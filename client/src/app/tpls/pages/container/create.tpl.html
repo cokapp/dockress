@@ -27,8 +27,8 @@
                         <thead>
                             <tr>
                                 <th>容器端口</th>
-                                <th>协议</th>
                                 <th>主机端口</th>
+                                <th>协议</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -41,15 +41,15 @@
                                 </td>
                                 <td>
                                     <div class="field">
-                                        <select class="ui fluid dropdown" ng-model="portBinding.protocol">
-                                            <option value="tcp">TCP</option>
-                                            <option value="udp">UDP</option>
-                                        </select>
+                                        <input type="number" step="1" ng-model="portBinding.hostPort"></input>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="field">
-                                        <input type="number" step="1" ng-model="portBinding.hostPort"></input>
+                                        <select class="ui fluid dropdown" ng-model="portBinding.protocol">
+                                            <option value="tcp">TCP</option>
+                                            <option value="udp">UDP</option>
+                                        </select>
                                     </div>
                                 </td>
                                 <td>
@@ -63,7 +63,43 @@
             </section>
         </div>
         <div class="eight wide column">
+            <h4>卷映射</h4>
             <section class="binds">
+                <div class="ui form">
+                    <table class="ui table">
+                        <thead>
+                            <tr>
+                                <th>容器路径</th>
+                                <th>主机路径</th>
+                                <th>只读</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="bind in containerCreateVo.binds track by $index">
+                                <td>
+                                    <div class="field">
+                                        <input type="text" ng-model="bind.path"></input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="field">
+                                        <input type="text" ng-model="bind.hostPath"></input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="field">
+                                        <div ng-switch ng-model="bind.readOnly" ng-true-value="true" ng-false-value="false"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ui button orange" ng-click="removeBind($index)">移除</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="ui button fluid primary" ng-class="{disabled: !bindsValidate()}" ng-click="addBind()">添加卷映射</div>
+                </div>
             </section>
         </div>
         <div class="eight wide column">
@@ -101,7 +137,7 @@
             </section>
         </div>
         <div class="sixteen wide column">
-            <div class="ui button fluid primary" ng-click="create()">提交</div>
+            <div class="ui button fluid primary" ng-class="{disabled: !envsValidate() || !portBindingsValidate() || !bindsValidate()}" ng-click="create()">提交</div>
         </div>
     </div>
 </div>
