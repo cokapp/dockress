@@ -12,6 +12,6 @@ public class EnvVo {
 	private String value;
 
 	public String toEnv() {
-		return name + " " + value;
+		return name + "=" + value;
 	}
 }
