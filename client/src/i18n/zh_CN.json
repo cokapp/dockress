@@ -11,7 +11,8 @@
         "detail": {
             "exited": "已停止",
             "running": "运行中",
-            "created": "已创建"
+            "created": "已创建",
+            "changing": "变动中"
         }
     },
     "containers": {

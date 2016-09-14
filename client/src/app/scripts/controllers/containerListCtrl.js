@@ -8,10 +8,6 @@
 
 
 
-
-
-
-        var isSwitch = false;
         //切换容器状态
         $scope.switch = function($event, container) {
             if (container.State == 'running') {

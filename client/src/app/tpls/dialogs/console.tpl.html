@@ -1,0 +1,20 @@
+<div class="app-dialog-console" ng-controller="containerConsoleCtrl">   
+    <md-content class="md-padding">
+        <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+            <md-tab label="Attach">
+                <div>
+                    <div>
+                        <div ng-term url="attachUrl" start="attachStart"></div>
+                    </div>
+                </div>
+            </md-tab>
+            <md-tab ng-repeat="tab in tabs" label="{{tab.label}}">
+                <div>
+                    <div ng-term url="tab.execUrl" start="tab.start"></div>
+                </div>
+            </md-tab>
+            <md-tab label="增加" ng-click="add()" ng-disabled="isMax">
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>

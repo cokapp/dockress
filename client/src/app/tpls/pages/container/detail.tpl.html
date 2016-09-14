@@ -11,6 +11,9 @@
                         {{'container.detail.' + container.State.Status|translate}}
                     </strong>
                     <span>容器状态</span>
+                    <div>
+                        <div ng-switch ng-before-change="switch($event)" ng-model="container.State.Status" ng-true-value="'running'" ng-false-value="'exited'"></div>
+                    </div>
                 </div>
             </li>
             <li class="item cpu">
@@ -43,6 +46,8 @@
             <a class="item" data-tab="volumn">挂载点</a>
             <a class="item" data-tab="port">端口映射</a>
             <a class="item" data-tab="env">环境变量</a>
+            <a class="item" data-tab="log">日志</a>
+            <a class="item" data-tab="console">终端</a>
         </div>
         <div class="ui flat tab active" data-tab="base">
             <table class="ui table very basic">
@@ -118,19 +123,11 @@
                 </tbody>
             </table>
         </div>
-    </div>
-
-
-    <div class="text pages">
-        <div class="ui top attached tabular menu">
-            <a class="item active" data-tab="attach">Attach</a>
-            <a class="item" data-tab="exec">Exec</a>
+        <div class="ui flat tab" data-tab="log">
+            日志
         </div>
-        <div class="ui bottom attached tab segment active" data-tab="attach">
-            <div ng-term2 url="attachUrl" start="attachStart"></div>
-        </div>
-        <div class="ui bottom attached tab segment" data-tab="exec">
-            <div ng-term url="execUrl" start="execStart"></div>
+        <div class="ui flat tab" data-tab="console">
+            <div class="ui button primary" ng-click="openConsole()">打开</div>
         </div>
     </div>
 </div>

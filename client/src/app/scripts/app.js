@@ -11,7 +11,9 @@
         'toastr',
         'pascalprecht.translate',
         'ngWebSocket',
-        'highcharts-ng'
+        'ngDialog',
+        'highcharts-ng',
+        'ngMaterial'
     ]);
 
     //配置
