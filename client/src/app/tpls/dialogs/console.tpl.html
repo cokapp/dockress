@@ -8,6 +8,13 @@
                     </div>
                 </div>
             </md-tab>
+            <md-tab label="Log">
+                <div>
+                    <div>
+                        <div ng-term url="logUrl" start="logStart"></div>
+                    </div>
+                </div>
+            </md-tab>            
             <md-tab ng-repeat="tab in tabs" label="{{tab.label}}">
                 <div>
                     <div ng-term url="tab.execUrl" start="tab.start"></div>

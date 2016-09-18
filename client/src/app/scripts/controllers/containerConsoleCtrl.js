@@ -36,9 +36,8 @@
         $scope.attachUrl = 'ws://localhost:9000/attach/' + containerId;
         $scope.attachStart = true;
 
-
-        $scope.execUrl = 'ws://localhost:9000/exec/' + containerId + '/bash';
-        $scope.execStart = true;
+        $scope.logUrl = 'ws://localhost:9000/log/' + containerId;
+        $scope.logStart = true;
 
         //semantic初始化
         $element.find('.tabular.menu > .item').tab();

@@ -14,7 +14,6 @@
     "angular-translate": "^2.11.0",
     "ng-dialog": "^0.6.2",
     "angular-websocket": "^2.0.0",
-    "term.js": "^0.0.7",
     "sockjs-client": "^1.1.1",
     "highcharts-ng": "^0.0.12",
     "highcharts": "^4.2.6",

@@ -40,7 +40,6 @@
             });
         }
 
-
         //启动容器
         function start() {
             dockerApiSvr.containers_start($scope.container.Id, function(rsp) {

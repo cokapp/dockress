@@ -45,6 +45,8 @@
                     element.on('$destroy', function() {
                         term.destroy();
                     });
+                    //term.fit();
+                    term.toggleFullscreen(true);
 
                     inited = true;
                 }
