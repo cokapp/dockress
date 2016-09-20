@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "angular-cookies": "~1.4.2",
-    "angular-touch": "~1.4.2",
     "jquery": "~2.1.4",
     "angular-resource": "~1.4.2",
     "angular-ui-router": "~0.2.15",

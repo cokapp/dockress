@@ -1,0 +1,4 @@
+{
+    "base": "http://dockress:9000/docker",
+    "ws": "ws://dockress:9000"
+}

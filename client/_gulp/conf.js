@@ -14,7 +14,8 @@ var gutil = require('gulp-util');
 exports.paths = {
     src: 'src',
     dist: '_dist',
-    tmp: '.tmp'
+    tmp: '.tmp',
+    filter: '_filter'
 };
 
 /**

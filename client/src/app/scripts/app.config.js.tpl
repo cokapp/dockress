@@ -1,33 +1,16 @@
 (function() {
     'use strict';
 
-    //定义应用
-    window.ngApp = angular.module('dockress', [
-        'ngCookies',
-        'ngTouch',
-        'ngResource',
-        'ngSanitize',
-        'ui.router',
-        'toastr',
-        'pascalprecht.translate',
-        'ngWebSocket',
-        'ngDialog',
-        'highcharts-ng',
-        'ngMaterial'
-    ]);
-
     //配置
     ngApp.config(function($provide, $logProvider, $translateProvider, toastrConfig) {
         'ngInject';
 
         var conf = {};
         conf.SVR_URL = {
-            base: 'http://localhost:9000/docker'
+            base: '@@base',
+            ws: '@@ws'
         };
         $provide.value('CONF', conf);
-
-
-
 
         // Enable log
         $logProvider.debugEnabled(true);
@@ -41,22 +24,16 @@
 
         //国际化
         var lang = window.localStorage.lang || 'zh_CN';
-		$translateProvider.preferredLanguage(lang);
-		$translateProvider.useSanitizeValueStrategy('escape');
-		$translateProvider.useStaticFilesLoader({
-		    prefix: '/i18n/',
-		    suffix: '.json'
-		});
+                $translateProvider.preferredLanguage(lang);
+                $translateProvider.useSanitizeValueStrategy('escape');
+                $translateProvider.useStaticFilesLoader({
+                    prefix: '/i18n/',
+                    suffix: '.json'
+                });
 
         $translateProvider.useMissingTranslationHandler('regexTranslationHandler');
 
     });
 
-    //启动
-    ngApp.run(function($log) {
-        'ngInject';
-
-        $log.debug('已经启动！');
-    });
 
 })();

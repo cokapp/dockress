@@ -21,7 +21,7 @@
                 var init = function() {
                     var term = new Terminal({
                         cols: 100,
-                        rows: 20,
+                        rows: 15,
                         convertEol: true,
                         useStyle: true,
                         cursorBlink: true,
@@ -45,8 +45,6 @@
                     element.on('$destroy', function() {
                         term.destroy();
                     });
-                    //term.fit();
-                    term.toggleFullscreen(true);
 
                     inited = true;
                 }
