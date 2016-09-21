@@ -1,0 +1,37 @@
+{
+    "header": {
+        "overview": "总览",
+        "containers": "容器",
+        "images": "镜像",
+        "registrys": "仓库",
+        "nodes": "节点",
+        "search": "搜索容器、镜像"
+    },
+    "containers": {
+        "detail": "明细",
+        "exited": "已停止",
+        "running": "运行中",
+        "changing": "变动中",
+        "Up Less than a second": "刚刚",
+        "Up (.*) seconds": "超过 {{1}} 秒",
+        "Up About a minute": "大概一分钟",
+        "Up (.*) minutes": "超过 {{1}} 分钟",
+        "Up About an hour": "大概一小时",
+        "Up (.*) hours": "超过 {{1}} 小时",
+        "Exited \\(.*\\) Less than a second ago": "刚刚",
+        "Exited \\(.*\\) (.*) seconds ago": "{{1}} 秒以前",
+        "Exited \\(.*\\) About a minute ago": "大概一分钟以前",
+        "Exited \\(.*\\) (.*) minutes ago": "{{1}}分钟以前",
+        "Exited \\(.*\\) (.*) hours ago": "{{1}}小时以前",
+        "Exited \\(.*\\) (.*) weeks ago": "{{1}} 周以前"
+    },
+    "images": {
+        "refresh": "刷新",
+        "pull": "拉取",
+        "search_images": "搜索映像..."
+    },
+    "registrys": {
+        "search_images": "搜索仓库...",
+        "pull": "拉取"
+    }
+}

@@ -12,7 +12,7 @@ gulp.task('scripts-reload', function() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', ['replace'], function() {
     return buildScripts();
 });
 
