@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="styles/vendor-437348df87.css">
+    <link rel="stylesheet" href="styles/vendor-fa90c921a4.css">
 
-    <link rel="stylesheet" href="styles/app-9ef96a546e.css">
+    <link rel="stylesheet" href="styles/app-303277bab1.css">
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -18,11 +18,15 @@
     <![endif]-->
 
     <div ng-include="'app/tpls/public/sidebar.tpl.html'" include-replace></div>
-    <div ng-include="'app/tpls/public/main.tpl.html'" include-replace></div>
+    <div class="app-main">
+        <div ng-include="'app/tpls/public/header.tpl.html'" include-replace></div>
+        <div class="app-content" ui-view></div>
+        <div ng-include="'app/tpls/public/footer.tpl.html'" include-replace></div>
+    </div>
+    
+    <script src="scripts/vendor-ebfecd2cb6.js"></script>
 
-    <script src="scripts/vendor-656e34c6bc.js"></script>
-
-    <script src="scripts/app-f1eaf47859.js"></script>
+    <script src="scripts/app-39f7b5d6a8.js"></script>
 
   </body>
 </html>

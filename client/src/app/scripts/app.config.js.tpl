@@ -7,8 +7,8 @@
 
         var conf = {};
         conf.SVR_URL = {
-            base: '@@base',
-            ws: '@@ws'
+            base: 'http://@@svr/api',
+            ws: 'ws://@@svr/ws'            
         };
         $provide.value('CONF', conf);
 

@@ -25,7 +25,7 @@ import com.github.dockerjava.api.command.ExecCreateCmdResponse;
  * @date 2016年8月3日 上午10:14:08
  *
  */
-@ServerEndpoint("/exec/{containerId}/{cmd}")
+@ServerEndpoint("/ws/exec/{containerId}/{cmd}")
 public class ExecHandler extends BaseDockerHandler {
 
 	@OnOpen

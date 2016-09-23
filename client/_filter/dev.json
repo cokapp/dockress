@@ -1,4 +1,3 @@
 {
-    "base": "http://localhost:9000/docker",
-    "ws": "ws://localhost:9000"
+    "svr": "localhost:9000"
 }

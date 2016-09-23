@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    ngApp.controller('containerDetailCtrl', function($scope, $stateParams, $state, $filter, $element, $websocket, ngDialog, dockerApiSvr, containerSvr) {
+    ngApp.controller('containerDetailCtrl', function($scope, $stateParams, $state, $filter, $element, $websocket, ngDialog, dockerApiSvr, containerSvr, CONF) {
         'ngInject';
 
         var containerId = $scope.containerId = $stateParams.id;
-        var statsUrl = 'ws://localhost:9000/stats/' + containerId;
+        var statsUrl = CONF.SVR_URL.ws + '/stats/' + containerId;
 
         var ws = $websocket(statsUrl);
 

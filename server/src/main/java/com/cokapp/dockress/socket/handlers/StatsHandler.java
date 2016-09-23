@@ -10,7 +10,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import com.cokapp.dockress.dockerjava.core.async.StatsResultCallback;
 
-@ServerEndpoint("/stats/{containerId}")
+@ServerEndpoint("/ws/stats/{containerId}")
 public class StatsHandler extends BaseDockerHandler {
 
 	@OnOpen

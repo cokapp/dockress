@@ -11,7 +11,7 @@ import javax.websocket.server.ServerEndpoint;
 import com.cokapp.dockress.dockerjava.core.async.StatsResultCallback;
 import com.cokapp.dockress.dockerjava.core.command.LogContainerResultCallback;
 
-@ServerEndpoint("/log/{containerId}")
+@ServerEndpoint("/ws/log/{containerId}")
 public class LogHandler extends BaseDockerHandler {
 	
 	@OnOpen

@@ -19,6 +19,8 @@ gulp.task('replace', function() {
     var srcPath = path.join(conf.paths.src, '/app/scripts/app.config.js.tpl'),
         destPath = path.join(conf.paths.src, '/app/scripts');
 
+    console.log('use ' + args.env + ' filter!');
+
     gulp.src(srcPath)
         .pipe(replace({
             variables: require('../_filter/' + args.env + '.json')

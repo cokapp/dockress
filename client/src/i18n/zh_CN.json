@@ -33,6 +33,7 @@
         "Exited \\(.*\\) (.*) minutes ago": "{{1}}分钟以前",
         "Exited \\(.*\\) (.*) hours ago": "{{1}}小时以前",
         "Exited \\(.*\\) (.*) weeks ago": "{{1}} 周以前",
+        "Exited \\(.*\\) About an hour ago": "一个小时以前",
         "Created": "从未运行"
     },
     "images": {

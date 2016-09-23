@@ -7,8 +7,8 @@
 
         var conf = {};
         conf.SVR_URL = {
-            base: 'http://localhost:9000/docker',
-            ws: 'ws://localhost:9000'
+            base: 'http://ct.home:180/api',
+            ws: 'ws://ct.home:180/ws'            
         };
         $provide.value('CONF', conf);
 

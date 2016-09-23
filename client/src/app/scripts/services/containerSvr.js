@@ -27,7 +27,16 @@
                 cb(rsp);
             });
         };
-
+        svr.remove = function(containerId, cb){
+            var url = dockerUrl + '/containers/' + containerId + '/remove';
+            var p = $http({
+                method: 'GET',
+                url: url
+            });
+            p.success(function(rsp) {
+                cb(rsp);
+            });
+        };
 
 
 

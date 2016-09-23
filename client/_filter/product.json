@@ -1,4 +1,3 @@
 {
-    "base": "http://dockress:9000/docker",
-    "ws": "ws://dockress:9000"
+    "svr": "ct.home:180"
 }

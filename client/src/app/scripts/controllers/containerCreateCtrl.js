@@ -53,7 +53,7 @@
                 return;
             }
 
-            $scope.containerCreateVo.envs.push({
+            addEnv({
                 name: undefined,
                 value: undefined
             });
@@ -89,6 +89,7 @@
         $scope.create = function() {
             containerSvr.create($scope.containerCreateVo, function(rsp) {
                 console.log(rsp);
+
             });
         };
 
@@ -120,7 +121,12 @@
                 }
                 //初始化环境变量
                 for(var i in $scope.image.Config.Env){
-                    var env = $scope.image.Config.Env[i];
+                    var env = $scope.image.Config.Env[i].split('=');
+
+                    addEnv({
+                        name: env[0],
+                        value: env[1]
+                    });
                 }                              
 
                 console.log($scope.image);
@@ -133,6 +139,9 @@
         }
         function addBind(data){
             $scope.containerCreateVo.binds.push(data);            
+        }
+        function addEnv(data){
+            $scope.containerCreateVo.envs.push(data);            
         }
 
     });

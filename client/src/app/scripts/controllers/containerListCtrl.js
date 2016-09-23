@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    ngApp.controller('containerListCtrl', function($scope, $element, dockerApiSvr) {
+    ngApp.controller('containerListCtrl', function($scope, $element, dockerApiSvr, containerSvr) {
         'ngInject';
 
         reload();
@@ -15,10 +15,17 @@
             } else {
                 start(container);
             }
-
             container.State = 'changing';
-
             return false;
+        }
+        //删除容器
+        $scope.remove = function(container){
+            if(!confirm('确定移除该容器吗？')){
+                return;
+            }
+            containerSvr.remove(container.Id, function(rsp){
+                reload();
+            });
         }
 
 

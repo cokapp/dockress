@@ -9,7 +9,7 @@ import com.cokapp.quick.core.web.view.JsonResult;
 import com.github.dockerjava.api.model.Info;
 
 @Controller
-@RequestMapping(value = { "/docker" })
+@RequestMapping(value = { "/api" })
 public class RootApi extends BaseDockerApi {
 
 	@RequestMapping(value = { "/info" }, method = { RequestMethod.GET })

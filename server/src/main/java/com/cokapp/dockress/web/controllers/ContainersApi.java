@@ -17,7 +17,7 @@ import com.github.dockerjava.api.command.InspectContainerResponse;
 import com.github.dockerjava.api.model.Container;
 
 @Controller
-@RequestMapping(value = { "/docker/containers" })
+@RequestMapping(value = { "/api/containers" })
 public class ContainersApi extends BaseDockerApi {
 
 	@RequestMapping(value = { "/json" }, method = { RequestMethod.GET })
@@ -43,7 +43,16 @@ public class ContainersApi extends BaseDockerApi {
 
 		return JsonResult.newSuccess("处理成功!");
 	}
+	
+	@RequestMapping(value = { "/{containerId}/remove" }, method = { RequestMethod.GET })
+	@ResponseBody
+	public JsonResult<String> remove(@PathVariable(value = "containerId") String containerId) {
+		dockerClient.removeContainerCmd(containerId).exec();
 
+		return JsonResult.newSuccess("处理成功!");
+	}
+	
+	
 	@RequestMapping(value = { "/create" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public JsonResult<CreateContainerResponse> create(@RequestBody ContainerCreateVo containerCreateVo) {

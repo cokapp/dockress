@@ -13,7 +13,7 @@ import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.model.Image;
 
 @Controller
-@RequestMapping(value = { "/docker/images" })
+@RequestMapping(value = { "/api/images" })
 public class ImagesApi extends BaseDockerApi {
 	
 	@RequestMapping(value = { "/json" }, method = { RequestMethod.GET })

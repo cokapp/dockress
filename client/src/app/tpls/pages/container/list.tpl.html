@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="container in containers | orderBy:'Created'">
+            <tr ng-repeat="container in containers | orderBy:'Created' track by $index">
                 <td>
                     <a ui-sref="containerDetail({id: container.Id})">{{container.Id | limitTo : 12}}</a>
                 </td>
@@ -21,11 +21,14 @@
                     {{container.Image}}
                 </td>
                 <td>     
-                    <div class="ui label" ng-class="{'running':'green', 'exited':'red'}[container.State]">{{'containers.' + container.State|translate}}</div><br>
+                    <div class="ui mini label" ng-class="{'running':'green', 'exited':'red'}[container.State]">{{'containers.' + container.State|translate}}</div><br>
                     <span class="small">{{'containers.' + container.Status|translate}}</span>
                 </td>
-                <td>
-                    <div ng-switch disabled="{'changing': true}[container.State]" ng-before-change="switch($event, container)" ng-data="container" ng-model="container.State" ng-true-value="'running'" ng-false-value="'exited'"></div>
+                <td class="action">
+                    <button ng-if="container.State=='exited'" ng-click="remove(container)" class="inline mini compact ui button orange">移除</button>
+                    <div class="inline">
+                        <span ng-switch disabled="{'changing': true}[container.State]" ng-before-change="switch($event, container)" ng-data="container" ng-model="container.State" ng-true-value="'running'" ng-false-value="'exited'"></span>
+                    </div>
                 </td>
             </tr>
         </tbody>

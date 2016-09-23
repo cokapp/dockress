@@ -12,7 +12,7 @@ import javax.websocket.server.ServerEndpoint;
 import com.cokapp.dockress.dockerjava.core.command.ExecStartResultCallback;
 import com.github.dockerjava.api.command.AttachContainerCmd;
 
-@ServerEndpoint("/attach/{containerId}")
+@ServerEndpoint("/ws/attach/{containerId}")
 public class AttachHandler extends BaseDockerHandler{
 
 	@OnOpen
