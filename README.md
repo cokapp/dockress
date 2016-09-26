@@ -78,6 +78,8 @@ docker -H 192.168.99.100:3376 info
 ```
 
 
+docker run -p 180:80 -v /mnt/hgfs/dockress/client:/root/dockress/client -d dockress
+
 
 
 

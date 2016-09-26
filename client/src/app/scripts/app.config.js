@@ -7,9 +7,17 @@
 
         var conf = {};
         conf.SVR_URL = {
-            base: 'http://ct.home:180/api',
-            ws: 'ws://ct.home:180/ws'            
+            base: 'http:///api',
+            ws: 'ws:///ws'            
         };
+
+        //未配置服务器地址，默认取当前当前服务器
+        if('' == ''){
+            var svr = window.location.host;
+            conf.SVR_URL.base = 'http://' + svr + '/api';
+            conf.SVR_URL.ws = 'ws://' + svr + '/ws';
+        }
+
         $provide.value('CONF', conf);
 
         // Enable log

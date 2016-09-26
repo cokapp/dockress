@@ -25,10 +25,10 @@
                     <span class="small">{{'containers.' + container.Status|translate}}</span>
                 </td>
                 <td class="action">
-                    <button ng-if="container.State=='exited'" ng-click="remove(container)" class="inline mini compact ui button orange">移除</button>
                     <div class="inline">
                         <span ng-switch disabled="{'changing': true}[container.State]" ng-before-change="switch($event, container)" ng-data="container" ng-model="container.State" ng-true-value="'running'" ng-false-value="'exited'"></span>
                     </div>
+                    <button ng-if="container.State=='exited'" ng-click="remove(container)" class="inline mini compact ui button orange">移除</button>                    
                 </td>
             </tr>
         </tbody>

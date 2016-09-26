@@ -6,7 +6,8 @@
 'use strict';
 var gulp = require('gulp');
 //文件读取
-var wrench = require('wrench');
+var wrench = require('wrench'),
+    minimist = require('minimist');
 
 /**
  *  This will load all js or coffee files in the gulp directory
@@ -26,3 +27,11 @@ wrench.readdirSyncRecursive('./_gulp').filter(function(file) {
 gulp.task('default', ['clean'], function() {
     gulp.start('build');
 });
+
+var opt = {
+	string: 'env',
+	default: { env: process.env.NODE_ENV || 'dev' }
+};
+var args = minimist(process.argv.slice(2), opt);
+
+process._args = args;

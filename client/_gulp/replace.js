@@ -21,9 +21,12 @@ gulp.task('replace', function() {
 
     console.log('use ' + args.env + ' filter!');
 
+    var replaceVariables = require('../_filter/' + args.env + '.json');
+    //replaceVariables.env = replaceVariables.env || args.env;
+
     gulp.src(srcPath)
         .pipe(replace({
-            variables: require('../_filter/' + args.env + '.json')
+            variables: replaceVariables
         }))
         .pipe(rename('app.config.js'))
         .pipe(gulp.dest(destPath));

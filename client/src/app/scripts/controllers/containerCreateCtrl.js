@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    ngApp.controller('containerCreateCtrl', function($scope, $stateParams, $element, $websocket, dockerApiSvr, containerSvr) {
+    ngApp.controller('containerCreateCtrl', function($scope, $state, $stateParams, $element, $websocket, dockerApiSvr, containerSvr) {
         'ngInject';
 
         var imageId = $scope.imageId = $stateParams.imageId;
@@ -88,8 +88,9 @@
 
         $scope.create = function() {
             containerSvr.create($scope.containerCreateVo, function(rsp) {
-                console.log(rsp);
-
+                if(rsp.status.success){
+                    $state.go('container');
+                }
             });
         };
 

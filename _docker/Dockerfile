@@ -6,7 +6,7 @@ RUN mkdir /tmp/dockress \
 
 WORKDIR /tmp/dockress
 
-ENV DOCKER_HOST tcp://192.168.79.128:2375
+ENV DOCKER_HOST=
 
 #安装jetty
 #RUN wget http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.3.11.v20160721/jetty-distribution-9.3.11.v20160721.zip \
