@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ ! $DOCKER_HOST ]; then
-	HOST_IP=$(/sbin/ip route|awk '/default/ { print $3 }');
+	HOST_IP=$(ip r | awk '/default/{print $3}');
 	export DOCKER_HOST="tcp://${HOST_IP}:2375";
 fi
 
