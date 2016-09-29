@@ -5,7 +5,7 @@ ENV DOCKER_HOST=
 
 #新建目录
 RUN mkdir /root/dockress \
-    & mkdir /root/dockress/server
+    && mkdir /root/dockress/server
 WORKDIR /root/dockress
 
 #获取JDK
