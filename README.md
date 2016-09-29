@@ -80,6 +80,7 @@ docker -H 192.168.99.100:3376 info
 
 docker run -p 180:80 -v /mnt/hgfs/dockress/client:/root/dockress/client -d dockress
 
+docker run -p 980:80 dockress:v9
 
 
 

@@ -1,12 +1,14 @@
 #!/bin/sh
 
+export JAVA="/usr/java/jre1.8.0_102/bin/java";
+export JETTY_BASE="/root/dockress/server";
+
 if [ ! $DOCKER_HOST ]; then
-	HOST_IP=$(ip r | awk '/default/{print $3}');
-	export DOCKER_HOST="tcp://${HOST_IP}:2375";
+	export DOCKER_HOST="tcp://$(ip r | awk '/default/{print $3}'):2375";
+	echo "use ${DOCKER_HOST} as docker server!"
 fi
 
-cd /root/dockress/jetty
-bin/jetty.sh start 
+/root/dockress/jetty/bin/jetty.sh start
 
 nginx -g "daemon off;"
 

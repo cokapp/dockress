@@ -1,43 +1,37 @@
-FROM openjdk:8-jre
+FROM centos:7
 MAINTAINER dev@cokapp.com
-
-RUN mkdir /tmp/dockress \
-	&& mkdir /root/dockress
-
-WORKDIR /tmp/dockress
 
 ENV DOCKER_HOST=
 
-#安装jetty
-#RUN wget http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.3.11.v20160721/jetty-distribution-9.3.11.v20160721.zip \
-#        && unzip jetty-distribution-9.3.11.v20160721.zip -d jetty
-COPY ./jetty-distribution-9.3.11.v20160721.zip /tmp/dockress
-RUN unzip jetty-distribution-9.3.11.v20160721.zip \
-	&& mv jetty-distribution-9.3.11.v20160721 /root/dockress/jetty
-
-#安装nginx
-#RUN wget http://nginx.org/download/nginx-1.10.1.tar.gz \
-#        && tar xf nginx-1.10.1.tar.gz -d nginx
-RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
-	&& echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list \
-	&& apt-get update \
-	&& apt-get install --no-install-recommends --no-install-suggests -y \
-                                                vim \
-						nginx=1.10.1-1~jessie
-
-COPY ./nginx.conf /etc/nginx/nginx.conf  
-
-#添加服务端
-COPY ./dockress.war /root/dockress/jetty/webapps/ROOT.war
-
-#添加客户端
-COPY ./client /root/dockress/client
-
-
+#新建目录
+RUN mkdir /root/dockress \
+    & mkdir /root/dockress/server
 WORKDIR /root/dockress
 
-VOLUME /root/dockress/client
+#获取JDK
+#ADD ./bin/jre-8u102-linux-x64.rpm /var/tmp/jre-8u102-linux-x64.rpm
+RUN curl -L "http://download.oracle.com/otn-pub/java/jdk/8u102-b14/jre-8u102-linux-x64.rpm" -H "Cookie: oraclelicense=accept-securebackup-cookie"  -H "Connection: keep-alive" -O /var/tmp/jre-8u102-linux-x64.rpm
+
+#安装JDK
+RUN rpm -ivh /var/tmp/jre-8u102-linux-x64.rpm \
+    && rm -rf /var/tmp/jre-8u102-linux-x64.rpm
+
+#安装jetty
+ADD ./bin/jetty.tar.xz ./
+
+#安装nginx和ip工具
+RUN rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm \
+    && yum install -y nginx iproute
+ADD ./nginx.conf /etc/nginx/
+
+#添加服务端
+ADD ./start.ini ./server/
+ADD ./bin/dockress.war ./server/webapps/ROOT.war
+
+#添加客户端
+ADD ./bin/client.tar.xz ./
+
 EXPOSE 80
 
-COPY ./docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ADD ./docker-entrypoint.sh ./
+ENTRYPOINT ["./docker-entrypoint.sh"]
