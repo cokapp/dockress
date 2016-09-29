@@ -33,5 +33,7 @@ ADD ./bin/client.tar.xz ./
 
 EXPOSE 80
 
+#启动脚本
 ADD ./docker-entrypoint.sh ./
+RUN chmod +x ./docker-entrypoint.sh
 ENTRYPOINT ["./docker-entrypoint.sh"]
