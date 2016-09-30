@@ -83,6 +83,12 @@ docker run -p 180:80 -v /mnt/hgfs/dockress/client:/root/dockress/client -d dockr
 docker run -p 980:80 dockress:v9
 
 
+docker run -p 780:80 -e DOCKER_HOST=tcp://192.168.99.100:2376 index.alauda.cn/cokapposc/dockress
+
+docker run -p 780:80 -e DOCKER_HOST=tcp://192.168.99.100:2376 -v /C/Users/heichl/.docker/machine/machines/aliyun/:/root/dockress/certs/ dockress:v2
+
+
+
 
 
 

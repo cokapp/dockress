@@ -2,6 +2,7 @@ FROM centos:7
 MAINTAINER dev@cokapp.com
 
 ENV DOCKER_HOST=
+ENV DOCKER_CERT_PATH=/root/dockress/certs/
 
 #新建目录
 RUN mkdir /root/dockress \
@@ -9,8 +10,8 @@ RUN mkdir /root/dockress \
 WORKDIR /root/dockress
 
 #获取JDK
-#ADD ./bin/jre-8u102-linux-x64.rpm /var/tmp/jre-8u102-linux-x64.rpm
-RUN curl -L "http://download.oracle.com/otn-pub/java/jdk/8u102-b14/jre-8u102-linux-x64.rpm" -H "Cookie: oraclelicense=accept-securebackup-cookie"  -H "Connection: keep-alive" -o /var/tmp/jre-8u102-linux-x64.rpm
+ADD ./bin/jre-8u102-linux-x64.rpm /var/tmp/jre-8u102-linux-x64.rpm
+#RUN curl -L "http://download.oracle.com/otn-pub/java/jdk/8u102-b14/jre-8u102-linux-x64.rpm" -H "Cookie: oraclelicense=accept-securebackup-cookie"  -H "Connection: keep-alive" -o /var/tmp/jre-8u102-linux-x64.rpm
 
 #安装JDK
 RUN rpm -ivh /var/tmp/jre-8u102-linux-x64.rpm \
@@ -32,6 +33,7 @@ ADD ./bin/dockress.war ./server/webapps/ROOT.war
 ADD ./bin/client.tar.xz ./
 
 EXPOSE 80
+VOLUME /root/dockress/certs/
 
 #启动脚本
 ADD ./docker-entrypoint.sh ./
