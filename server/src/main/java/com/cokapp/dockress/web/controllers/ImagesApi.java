@@ -19,7 +19,7 @@ public class ImagesApi extends BaseDockerApi {
 	@RequestMapping(value = { "/json" }, method = { RequestMethod.GET })
 	@ResponseBody
 	public JsonResult<Image> json() {
-		List<Image> lists = dockerClient.listImagesCmd().exec();
+		List<Image> lists = getDockerClient().listImagesCmd().exec();
 		
 		return JsonResult.newSuccess(lists);
 	}
@@ -27,7 +27,7 @@ public class ImagesApi extends BaseDockerApi {
 	@RequestMapping(value = { "/{imageId}/json" }, method = { RequestMethod.GET })
 	@ResponseBody
 	public JsonResult<InspectImageResponse> inspect(@PathVariable(value = "imageId") String imageId) {
-		InspectImageResponse inspectImageResponse = dockerClient.inspectImageCmd(imageId).exec();
+		InspectImageResponse inspectImageResponse = getDockerClient().inspectImageCmd(imageId).exec();
 
 		return JsonResult.newSuccess(inspectImageResponse);		
 	}	

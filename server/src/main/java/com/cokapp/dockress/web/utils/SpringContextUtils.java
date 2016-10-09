@@ -137,7 +137,7 @@ public class SpringContextUtils implements ApplicationContextAware, ServletConte
 			System.out.println();
 			System.out.println();
 			System.out.println("---------------------------------------------------------------------");
-			System.out.println("========ApplicationContext配置成功" + applicationContext + "========");
+			System.out.println("======== spring context config successful(" + applicationContext + ")========");
 			System.out.println("---------------------------------------------------------------------");
 			System.out.println();
 			System.out.println();

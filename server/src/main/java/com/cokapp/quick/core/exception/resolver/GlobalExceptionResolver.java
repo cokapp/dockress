@@ -31,7 +31,7 @@ public class GlobalExceptionResolver extends SimpleMappingExceptionResolver {
 	protected ModelAndView doResolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
 
-		GlobalExceptionResolver.logger.error("发生异常，堆栈信息：", ex);
+		GlobalExceptionResolver.logger.error("发生异常，堆栈信息：{}", ex);
 
 		ModelAndView mv = null;
 		// 顺序处理，返回非null时认为处理完毕，忽略后续resolver

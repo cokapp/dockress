@@ -23,7 +23,7 @@ public class ContainersApi extends BaseDockerApi {
 	@RequestMapping(value = { "/json" }, method = { RequestMethod.GET })
 	@ResponseBody
 	public JsonResult<Container> json() {
-		List<Container> lists = dockerClient.listContainersCmd().withShowAll(true).exec();
+		List<Container> lists = getDockerClient().listContainersCmd().withShowAll(true).exec();
 
 		return JsonResult.newSuccess(lists);
 	}
@@ -31,7 +31,7 @@ public class ContainersApi extends BaseDockerApi {
 	@RequestMapping(value = { "/{containerId}/start" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public JsonResult<String> start(@PathVariable(value = "containerId") String containerId) {
-		dockerClient.startContainerCmd(containerId).exec();
+		getDockerClient().startContainerCmd(containerId).exec();
 
 		return JsonResult.newSuccess("处理成功!");
 	}
@@ -39,7 +39,7 @@ public class ContainersApi extends BaseDockerApi {
 	@RequestMapping(value = { "/{containerId}/stop" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public JsonResult<String> stop(@PathVariable(value = "containerId") String containerId) {
-		dockerClient.stopContainerCmd(containerId).exec();
+		getDockerClient().stopContainerCmd(containerId).exec();
 
 		return JsonResult.newSuccess("处理成功!");
 	}
@@ -47,7 +47,7 @@ public class ContainersApi extends BaseDockerApi {
 	@RequestMapping(value = { "/{containerId}/remove" }, method = { RequestMethod.GET })
 	@ResponseBody
 	public JsonResult<String> remove(@PathVariable(value = "containerId") String containerId) {
-		dockerClient.removeContainerCmd(containerId).exec();
+		getDockerClient().removeContainerCmd(containerId).exec();
 
 		return JsonResult.newSuccess("处理成功!");
 	}
@@ -57,7 +57,7 @@ public class ContainersApi extends BaseDockerApi {
 	@ResponseBody
 	public JsonResult<CreateContainerResponse> create(@RequestBody ContainerCreateVo containerCreateVo) {
 
-		CreateContainerCmd cmd = dockerClient.createContainerCmd(containerCreateVo.getImageId());
+		CreateContainerCmd cmd = getDockerClient().createContainerCmd(containerCreateVo.getImageId());
 
 		cmd.withName(containerCreateVo.getName());
 		cmd.withPortBindings(containerCreateVo.getPortBindingList());
@@ -80,7 +80,7 @@ public class ContainersApi extends BaseDockerApi {
 	@RequestMapping(value = { "/{containerId}/json" }, method = { RequestMethod.GET })
 	@ResponseBody
 	public JsonResult<InspectContainerResponse> inspect(@PathVariable(value = "containerId") String containerId) {
-		InspectContainerResponse inspectContainerResponse = dockerClient.inspectContainerCmd(containerId).exec();
+		InspectContainerResponse inspectContainerResponse = getDockerClient().inspectContainerCmd(containerId).exec();
 
 		return JsonResult.newSuccess(inspectContainerResponse);
 	}
