@@ -90,7 +90,12 @@ docker run -p 780:80 -d -e DOCKER_HOST=tcp://192.168.99.100:2376 -v /c/Users/hei
 
 docker run -p 780:80 -d -e DOCKER_HOST=tcp://172.17.0.1:2376 -v /c/Users/heichl/.docker/machine/machines/aliyun:/root/dockress/certs dockress:v2
 
+docker run -p 780:80 -d -e DOCKER_HOST=tcp://172.17.0.1:2376 -v /c/Users/heichl/.docker/machine/machines/aliyun:/root/dockress/certs dockress:v4
 
 
 
+docker run -p 780:80 -d -e DOCKER_HOST=tcp://192.168.99.100:2376 -v /c/Users/heichl/.docker/machine/machines/aliyun:/root/dockress/certs dockress:v6
 
+
+
+docker run -p 780:80 -d -v /c/Users/heichl/.docker/machine/machines/aliyun:/root/dockress/certs dockress:v6
