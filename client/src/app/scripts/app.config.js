@@ -7,12 +7,12 @@
 
         var conf = {};
         conf.SVR_URL = {
-            base: 'http:///api',
-            ws: 'ws:///ws'            
+            base: 'http://localhost:9000/api',
+            ws: 'ws://localhost:9000/ws'            
         };
 
         //未配置服务器地址，默认取当前当前服务器
-        if('' == ''){
+        if('localhost:9000' == ''){
             var svr = window.location.host;
             conf.SVR_URL.base = 'http://' + svr + '/api';
             conf.SVR_URL.ws = 'ws://' + svr + '/ws';

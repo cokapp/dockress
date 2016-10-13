@@ -3,7 +3,7 @@
         <button class="ui labeled icon primary button">
             <i class="refresh icon"></i> {{'images.refresh'|translate}}
         </button>
-        <button class="ui labeled icon primary button">
+        <button class="ui labeled icon primary button" ng-click="pull()">
             <i class="cloud download icon"></i> {{'images.pull'|translate}}
         </button>
     </div>
@@ -34,11 +34,17 @@
                     <span>{{image.VirtualSize | FileSize}}</span>
                 </td>
                 <td>
-                    <button  ui-sref="containerCreate({imageId: image.Id})" class="ui primary button">
+                    <button  ui-sref="containerCreate({imageId: image.Id})" class="ui button primary inline mini compact">
                         启动
+                    </button>
+                    <button  ng-click="remove(image)" class="ui button orange inline mini compact">
+                        移除
                     </button>
                 </td>
             </tr>
+
+            
+            
         </tbody>
     </table>
 </div>

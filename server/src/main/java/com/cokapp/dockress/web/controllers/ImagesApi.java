@@ -32,4 +32,13 @@ public class ImagesApi extends BaseDockerApi {
 		return JsonResult.newSuccess(inspectImageResponse);		
 	}	
 	
+	@RequestMapping(value = { "/{imageId}/remove" }, method = { RequestMethod.GET })
+	@ResponseBody
+	public JsonResult<String> remove(@PathVariable(value = "imageId") String imageId) {
+		getDockerClient().removeImageCmd(imageId).exec();
+
+		return JsonResult.newSuccess("处理成功!");
+	}
+	
+	
 }

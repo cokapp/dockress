@@ -86,17 +86,6 @@
             });
         };
 
-        svr.images = function(cb) {
-            var url = dockerUrl + '/images/json';
-            var p = $http({
-                method: 'GET',
-                url: url
-            });
-            p.success(function(rsp) {
-                cb(rsp);
-            });
-        };
-
         svr.images_search = function(param, cb) {
             var url = dockerUrl + '/images/search';
             var p = $http({
