@@ -44,5 +44,8 @@
     "registrys": {
         "search_images": "搜索仓库...",
         "pull": "拉取"
-    }
+    },
+    "pullimage": {
+        "search": "搜索映像..."
+    }   
 }

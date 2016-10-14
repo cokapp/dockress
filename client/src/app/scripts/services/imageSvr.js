@@ -20,7 +20,7 @@
             });
         };
 
-        svr.remove = function(imageId, cb){
+        svr.remove = function(imageId, cb) {
             var url = dockerUrl + '/images/' + imageId + '/remove';
             var p = $http({
                 method: 'GET',
@@ -31,13 +31,26 @@
             });
         };
 
+        svr.search = function(term, cb) {
+            var url = dockerUrl + '/images/search';
+            var p = $http({
+                method: 'POST',
+                url: url,
+                params: {
+                    term: term
+                }
+            });
+            p.success(function(rsp) {
+                cb(rsp);
+            });
+        };
 
 
 
 
 
         //===================以下私有方法=======================
-       
+
 
         return svr;
     });

@@ -22,9 +22,9 @@
             ngDialog.open({
                 template: 'app/tpls/dialogs/pullImage.tpl.html',
                 scope: $scope,
-                width: '90%',
-                closeByDocument: false,
-                closeByEscape: false,
+                width: '60%',
+                closeByDocument: true,
+                closeByEscape: true,
                 className: 'ngdialog-theme-plain'
             });
         }

@@ -1,0 +1,56 @@
+.app-dialog-pullimage {
+    .search {
+        margin-top: 20px;
+    }
+    .images {
+        .item {
+            &:hover {
+                .action {
+                    width: 50px;
+                }
+            }
+            .action {
+                float: left;
+                overflow: hidden;
+                width: 4px;
+                background: green;
+            }
+            .info {
+                display: inline-block;
+                .name {
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                    color: #000;
+                    height: 20px;
+                    line-height: 20px;
+                }
+                .description {
+                    height: 30px;
+                    font-size: 0.9rem;
+                    max-width: 400px;
+                }
+            }
+            .star-count {
+                text-align: center;
+                i {
+                    height: 30px;
+                    line-height: 30px;
+                    padding: 0;
+                    margin: 0;
+                }
+                p {
+                    height: 20px;
+                    font-size: 0.9rem;
+                }
+            }
+            .official {
+                .icon-official {
+                    height: 50px;
+                    line-height: 50px;
+                    font-size: 25px;
+                    color: green;
+                }
+            }
+        }
+    }
+}

@@ -6,11 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cokapp.quick.core.web.view.JsonResult;
 import com.github.dockerjava.api.command.InspectImageResponse;
 import com.github.dockerjava.api.model.Image;
+import com.github.dockerjava.api.model.SearchItem;
 
 @Controller
 @RequestMapping(value = { "/api/images" })
@@ -40,5 +42,10 @@ public class ImagesApi extends BaseDockerApi {
 		return JsonResult.newSuccess("处理成功!");
 	}
 	
-	
+	@RequestMapping(value = { "/search" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public JsonResult<SearchItem> search(@RequestParam(value = "term") String term) {
+		List<SearchItem> searchItemList = getDockerClient().searchImagesCmd(term).exec();
+		return JsonResult.newSuccess(searchItemList);
+	}	
 }

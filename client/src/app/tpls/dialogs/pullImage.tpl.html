@@ -1,12 +1,30 @@
-<div class="app-dialog-pullimage" ng-controller="pullImageCtrl">   
-    <div class="ui left icon input fluid">
-        <input ng-model="repository" class="search prompt" type="text" placeholder="{{'header.search'|translate}}">
-        <i class="search icon"></i>
+<div class="app-dialog-pullimage" ng-controller="pullImageCtrl">
+    <div class="ui search">
+        <div class="ui icon input fluid">
+            <input ng-enter="search()" ng-model="repository" class="prompt" type="text" placeholder="{{'pullimage.search'|translate}}">
+            <i class="search icon"></i>
+        </div>
+        <div class="results"></div>
     </div>
+    <div class="images ui middle aligned selection celled list">
+        <div class="item" ng-repeat="image in images">
+            <div class="action">
 
-
-        <button class="ui labeled icon primary button" ng-click="pull()">
-            <i class="cloud download icon"></i> {{'images.pull'|translate}}
-        </button>
-
+            </div>
+            <div class="info">
+                <div class="name">{{image.name}}</div>
+                <div class="description">{{image.description}}</div>
+            </div>
+            <div class="star-count right floated">
+                <i class="star icon large yellow"></i>
+                <p>{{image.star_count}}</p>
+            </div>
+            <div class="official right floated" ng-if="image.official">
+                <i class="iconfont icon-official"></i>
+            </div>
+        </div>
+    </div>
+    <button class="ui labeled icon primary button" ng-click="pull()">
+        <i class="cloud download icon"></i> {{'images.pull'|translate}}
+    </button>
 </div>
