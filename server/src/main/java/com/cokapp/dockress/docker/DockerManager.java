@@ -8,8 +8,6 @@ import com.github.dockerjava.api.DockerClient;
  * 
  * @Description: TODO
  * @Copyright: Copyright (c) 2015
- * @Company:杭州爱财网络科技有限公司
- * @author heichengliang@aixuedai.com
  * @version V1.0.0
  * @since JDK 1.7
  * @date 2016年8月3日 下午4:44:16
